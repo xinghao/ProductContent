@@ -1,0 +1,6 @@
+<jaxws:bindings wsdlLocation="http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl" xmlns:jaxws="http://java.sun.com/xml/ns/jaxws">
+	<jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+</jaxws:bindings>
+
+
+

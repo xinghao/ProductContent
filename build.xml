@@ -1,0 +1,88 @@
+<project name="product_content" basedir="." default="build">
+	<property name="project.version" value="0.2"/>
+    <property name="src.dir" value="src"/>
+    <property name="lib.dir" value="lib"/> 
+    <property name="conf.dir" value="conf"/>    
+    <property name="build.dir"   value="build"/>
+    <property name="script.dir"     value="script"/>
+    <property name="meta-info.dir"     value="src/META-INF"/>
+    <property name="build.conf.dir"   value="${build.dir}/conf"/>
+    <property name="build.lib.dir"   value="${build.dir}/lib"/>
+    <property name="build.log.dir"   value="${build.dir}/logs"/>
+    <property name="build.script.dir"     value="${build.dir}"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+    <property name="build.meta-info.dir"     value="${build.dir}/classes/META-INF"/>
+    
+    <property name="main-class"  value="com.airarena.products.aws.main.ProductContent"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar">
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+        <mkdir dir="${build.meta-info.dir}"/>
+		<copy todir="${build.meta-info.dir}">
+			<fileset dir="${meta-info.dir}"/>
+		</copy>               
+    </target>
+
+	<target name="build" depends="jar">
+		<mkdir dir="${build.conf.dir}"/>		
+		<copy todir="${build.conf.dir}">
+            <fileset dir="${conf.dir}"/>
+        </copy>
+        <mkdir dir="${build.lib.dir}"/>
+        <mkdir dir="${build.log.dir}"/>
+		<copy todir="${build.lib.dir}">
+            <fileset dir="${lib.dir}"/>
+        </copy>
+		<copy todir="${build.script.dir}">
+            <fileset dir="${script.dir}"/>
+        </copy>        
+                        
+	</target>
+	
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+        <delete dir="${classes.dir}"/>
+    </target>
+
+    <target name="run" depends="build">
+       <java fork="true" classname="${main-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${jar.dir}/${ant.project.name}.jar"/>
+            </classpath>
+        </java>        
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+    <target name="main" depends="clean,run"/>
+	
+	<target name ="deploy_live" depends="build">
+	    <exec executable="rsync" failonerror="true">
+	      <arg value="-r"/>
+	      <arg value="-v"/>
+	      <arg value="-e ssh -p23452"/>
+	      <arg value="-C"/>
+	      <arg value="${build.dir}/" />
+	      <arg value="root1@67.228.198.72:/opt/apps/product_content/${project.version}"/>
+	    </exec>	
+	</target>
+	
+	
+</project>

@@ -1,0 +1,1 @@
+wsimport -d bin -s src  -p com.ECS.client.jax -b jaxws-custom.xml http://webservices.amazon.com/AWSECommerceService/AWSECommerceService.wsdl .
