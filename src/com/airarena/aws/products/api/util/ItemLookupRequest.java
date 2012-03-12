@@ -23,6 +23,7 @@ public class ItemLookupRequest extends BasicApiRequest {
 	private boolean includeReviewsSummary = true;
 	private ItemLookupResponse ilr= null;
 
+
 	
 	public ItemLookupRequest(String sourceObjectId, int reviewPage, int tagPage) {
 		super();
@@ -31,10 +32,11 @@ public class ItemLookupRequest extends BasicApiRequest {
 		this.tagPage = tagPage;
 		
         params.put("Operation", BasicApiRequest.AWS_OPERATION_ITEMLOOKUP);
-        params.put("ResponseGroup", BasicApiRequest.AWS_RESPONSE_GROUP_ITEMLOOKUP);
+        params.put("ResponseGroup", BasicApiRequest.AWS_RESPONSE_GROUP_ITEMLOOKUP + "," + BasicApiRequest.AWS_RESPONSE_GROUP_OFFERSUMMARY);
         params.put("IncludeReviewsSummary", String.valueOf(this.includeReviewsSummary));
         params.put("ItemId", this.sourceObjectId);
         params.put("ReviewPage", String.valueOf(this.reviewPage));
+
 //        params.put("TagPage", String.valueOf(this.tagPage));
         
 	}
@@ -146,11 +148,20 @@ public class ItemLookupRequest extends BasicApiRequest {
 		Node reviewUrlNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
 		this.ilr.setReviewUrl(reviewUrlNode.getTextContent());
 		
+		// price
+		expr = xpath.compile("//Item/OfferSummary/LowestNewPrice/Amount");
+		Node priceNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
+		this.ilr.setPriceAmount(Long.valueOf(priceNode.getTextContent()));
+		
+		expr = xpath.compile("//Item/OfferSummary/LowestNewPrice/CurrencyCode");
+		Node priceCodeNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
+		this.ilr.setCurrencyCode(priceCodeNode.getTextContent());
+		
 		
 		
 		expr = xpath.compile("//EditorialReview/Source");
 		Node descriptionSourceNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
-		if (descriptionSourceNode.getTextContent().equalsIgnoreCase(BasicApiRequest.AWS_CONTENT_DESCRIPTION_SOURCE.toLowerCase())) {
+		if (descriptionSourceNode!= null && descriptionSourceNode.getTextContent().equalsIgnoreCase(BasicApiRequest.AWS_CONTENT_DESCRIPTION_SOURCE.toLowerCase())) {
 			expr = xpath.compile("//EditorialReview/Content");
 			Node descriptionNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
 			this.ilr.setDescirption(descriptionNode.getTextContent());

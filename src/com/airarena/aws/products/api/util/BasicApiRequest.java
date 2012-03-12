@@ -18,6 +18,7 @@ public abstract class BasicApiRequest {
 	public static final String AWS_RESPONSE_GROUP_LARGE = "Large";
 	public static final String AWS_RESPONSE_GROUP_SMALL = "Small";
 	public static final String AWS_RESPONSE_GROUP_ITEMIDS = "ItemIds";
+	public static final String AWS_RESPONSE_GROUP_OFFERSUMMARY = "OfferSummary";
 //	public static final String AWS_RESPONSE_GROUP_TAGS = "Tags,TagsSummary";
 	public static final String AWS_RESPONSE_GROUP_EDITORIALREVIEW = "EditorialReview";
 	public static final String AWS_RESPONSE_GROUP_IMAGES = "Images";
@@ -27,7 +28,8 @@ public abstract class BasicApiRequest {
 	public static final String AWS_CONTENT_SPECIFICATION = "Technical Details";
 	public static final String AWS_CONTENT_DESCRIPTION_SOURCE = "Product Description";
 	
-	public static final String AWS_SORT_US_ELECTRONIC_DESC = "price";
+	public static final String AWS_SORT_US_ELECTRONIC_DESC = "-price";
+	public static final String AWS_SORT_US_ELECTRONIC_ASC = "price";
 	
 	public static final String AWS_VALUE_SEPARATER = "|||||";
 	
@@ -71,7 +73,7 @@ public abstract class BasicApiRequest {
         
         
         requestUrl = helper.sign(params);
-        System.out.println("Signed Request is \"" + requestUrl + "\"");
+        //System.out.println("Signed Request is \"" + requestUrl + "\"");
         this.requestUrl = requestUrl;
         
         try {
@@ -92,9 +94,9 @@ public abstract class BasicApiRequest {
 	protected boolean validApiResponse(Document doc) throws AwsApiException {
 		try {
 		    Node requestProcessingTimeNode = doc.getElementsByTagName("RequestProcessingTime").item(0);
-		    System.out.println("Result Time = " + requestProcessingTimeNode.getTextContent());	
+		    //System.out.println("Result Time = " + requestProcessingTimeNode.getTextContent());	
 		    Node validNode = doc.getElementsByTagName("IsValid").item(0);
-		    System.out.println("isValid? = " + validNode.getTextContent());
+		    //System.out.println("isValid? = " + validNode.getTextContent());
 		    if (validNode.getTextContent().equalsIgnoreCase("False")) {
 		    	throw new AwsApiException("Response valid failed! valid equals false");
 		    }        	

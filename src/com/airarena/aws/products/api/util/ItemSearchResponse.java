@@ -7,9 +7,18 @@ public class ItemSearchResponse extends BasicApiRespose {
 	private int totalPage;
 	private int totalItems;
 	private int currentPage;
+	private Long pageLowerNewPrice;
+	
+	
 	private ArrayList<String> itemsIdList = new ArrayList<String>();
 	
 	
+	public Long getPageLowerNewPrice() {
+		return pageLowerNewPrice;
+	}
+	public void setPageLowerNewPrice(Long pageLowerNewPrice) {
+		this.pageLowerNewPrice = pageLowerNewPrice;
+	}
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -49,9 +58,10 @@ public class ItemSearchResponse extends BasicApiRespose {
 		}
 			
 		return "[TotalPage:" + this.totalPage + "], " +
-			"[CurrentPage:" + this.currentPage + "], " +	
+			"[CurrentPage:" + this.currentPage + "], " +			
 			"[TotalItems:" + this.totalItems + "], " +			
 			"[ResultsAmount:" + this.itemsIdList.size() + "], " +
+			"[LowestNewPrice:" + this.pageLowerNewPrice + "], " +
 			"[ChildList:" + itemsIdList.toString() + "]";
 		     		
 	}	

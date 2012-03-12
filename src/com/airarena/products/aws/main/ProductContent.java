@@ -44,37 +44,65 @@ public class ProductContent {
 		
 	}
 	
-	private static void buildAProduct(String sourceObjectId, Long categoryId) {
+	private static void buildAProduct(String sourceObjectId, Long categoryId, int version) {
 		
 		BasicApiRequest bar = new ItemLookupRequest(sourceObjectId, 1, 1);
 		ItemLookupResponse b = (ItemLookupResponse) bar.call();
 		b.setCategoryId(categoryId);
-		Product p = Product.createOrUpdateFromAwsApi(b, 1);
+		Product p = Product.createOrUpdateFromAwsApi(b, version);
 		
 	}
 	
 	
-	private static void buildOnePageProductsForCategory(Category c, int page, String sort, String maxPrice) {
+	private static ItemSearchResponse buildOnePageProductsForCategory(Category c, int page, String sort, Long maxPrice, int version) {
 		
 		BasicApiRequest bar = new ItemSearchRequest(c.getSource_object_id(), BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, page, sort, maxPrice);
 		ItemSearchResponse b = (ItemSearchResponse) bar.call();
-		for(int i = 0; i<1 && i< b.getTotalItems(); i++ ) {
+		System.out.println(b);
+		
+		int totalItemsFetched = 0;
+	/*	
+		for(int i = 0; i<10 && i< b.getTotalItems(); i++ ) {
 			try {
 				String productSourceObjectId = b.getItemsIdList().get(i);
 				System.out.println(productSourceObjectId);
-				buildAProduct(productSourceObjectId, c.getId());
-			
+				buildAProduct(productSourceObjectId, c.getId(), version);
+				totalItemsFetched++;
 				Thread.sleep(800);
-			} catch (Exception e) {
+			} catch (Exception e) {				
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	*/	
+		return b;
 		
 	}
 	
-	private static void buildAllProductsForCategory(Category c) {
-		buildOnePageProductsForCategory(c, 1, BasicApiRequest.AWS_SORT_US_ELECTRONIC_DESC, null);
+	private static Long buildAllProductsForCategory(Category c, int version) {
+		int totalPagesFetched = 0;
+		Long currentLowPrice = 0L;
+		int currentPageNumberInTen = 0;
+		Long totalItemsFetched = 0L;
+		while (true) {
+			
+			// build 1 page
+			ItemSearchResponse b = buildOnePageProductsForCategory(c, currentPageNumberInTen + 1, null, currentLowPrice, version);
+			totalPagesFetched++;
+			currentPageNumberInTen++;
+			totalItemsFetched = totalItemsFetched + b.getItemsIdList().size();
+			// // quit if less than 10 item left in the page all already fetched all pages
+			if (b.getItemsIdList().size() < 10 || b.getTotalPage() == currentPageNumberInTen) {
+				return totalItemsFetched;
+			}
+			System.out.println("Fetch size: " + b.getItemsIdList().size());
+			
+			// reset page number and low price for every 10 pages.
+			if (currentPageNumberInTen == 10) {
+				currentPageNumberInTen = 0;
+				currentLowPrice = b.getPageLowerNewPrice();
+			}
+		}
 	}
 	/**
 	 * @param args
@@ -98,7 +126,7 @@ public class ProductContent {
 				Category c = cs.get(i);
 				//if (c.getId() < maxCategoryIdScraped) continue;				
 				System.out.println(c.getId());
-				buildAllProductsForCategory(c);
+				System.out.println("Total:" + buildAllProductsForCategory(c, 1));
 				break;
 			}
 			

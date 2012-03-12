@@ -39,7 +39,7 @@ public class InitDB {
 		s.newModel(new ProductAttributeMetaKey("Label".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("Languages".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("LegalDisclaimer".toLowerCase(), null));
-		s.newModel(new ProductAttributeMetaKey("ListPrice".toLowerCase(), null));
+		//s.newModel(new ProductAttributeMetaKey("ListPrice".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("MagazineType".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("Manufacturer".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("ManufacturerMaximumAge".toLowerCase(), "Defines the maximum age in months the user should be to enjoy the use of the item. For example, for a toy targeted at kids from ages 2 to 4, 4 would be the value for the ManufacturerMaximumAge. "));

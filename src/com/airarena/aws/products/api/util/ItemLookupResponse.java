@@ -21,6 +21,8 @@ public class ItemLookupResponse extends BasicApiRespose {
 	private String specificationUrl;
 	private Long categoryId;
 	private Long salesRank = 0L;	
+	private Long priceAmount = 0L;
+	private String currencyCode = "USD";
 	
 	private HashMap<String, Image> images = new HashMap<String, Image>();
 	private HashMap<Long, String> itemAttributes = new HashMap<Long, String>();
@@ -167,6 +169,26 @@ public class ItemLookupResponse extends BasicApiRespose {
 	}
 
 
+	public Long getPriceAmount() {
+		return priceAmount;
+	}
+
+
+	public void setPriceAmount(Long priceAmount) {
+		this.priceAmount = priceAmount;
+	}
+
+
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+
+
 	@Override
 	public String toString() {
 		StringBuilder itms = new StringBuilder();
@@ -191,7 +213,8 @@ public class ItemLookupResponse extends BasicApiRespose {
 				+ ", rawHtmlContentUrl=" + rawHtmlContentUrl + ", descirption="
 				+ descirption + ", SalesRank=" 
 				+ this.salesRank + ", reviewUrl=" + reviewUrl
-				+ ", specificationUrl=" + specificationUrl + ", images="
+				+ ", specificationUrl=" + specificationUrl
+				+ ", pricae=" + this.currencyCode + " " + this.priceAmount + ", images="
 //				+ itms.toString() 
 				+ ", attributs=" +as.toString()  
 				+ "]";
