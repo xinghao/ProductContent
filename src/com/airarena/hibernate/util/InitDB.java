@@ -6,7 +6,7 @@ public class InitDB {
 	
 	// should only be run when we create database
 	public static void insertInitData() {
-		SessionService s =  SessionService.getInstance();
+		MyEntityManager s = new MyEntityManager();
 		s.newModel(new Provider("aws"));
 		s.newModel(new ProductAttributeMetaKey("Artist".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("AspectRatio".toLowerCase(), "The ratio of an item's length to its width."));

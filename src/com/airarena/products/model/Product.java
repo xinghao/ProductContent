@@ -22,7 +22,7 @@ import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
 import com.airarena.aws.products.api.util.ItemLookupResponse;
-import com.airarena.hibernate.util.SessionService;
+import com.airarena.hibernate.util.MyEntityManagerFactory;
 import com.airarena.product.resources.Image;
 
 @Entity
@@ -31,13 +31,14 @@ public class Product extends BaseModel {
 	
     private Long id;
     
-	private String source_bject_id;	
+	private String source_object_id;	
 	private Long category_id;
 	private String rawXmlContentUrl;
 	private String rawHtmlContentUrl;
 	private String descirption;
 	private String reviewUrl;
 	private String specificationUrl;
+	private Long salesRank;
     private int is_valid = 1;
     private int version = 1;    
     private Date created_at;
@@ -51,15 +52,16 @@ public class Product extends BaseModel {
 	
 	public Product(String source_bject_id, Long category_id, String rawXmlContentUrl,
 			String rawHtmlContentUrl, String descirption, String reviewUrl,
-			String specificationUrl, int is_valid, int version) {
+			String specificationUrl, Long salesRank, int is_valid, int version) {
 		super();
-		this.source_bject_id = source_bject_id;
+		this.source_object_id = source_bject_id;
 		this.category_id = category_id;
 		this.rawXmlContentUrl = rawXmlContentUrl;
 		this.rawHtmlContentUrl = rawHtmlContentUrl;
 		this.descirption = descirption;
 		this.reviewUrl = reviewUrl;
 		this.specificationUrl = specificationUrl;
+		this.salesRank = salesRank;
 		this.is_valid = is_valid;
 		this.version = version;
 		this.updated_at = this.created_at = new Date();
@@ -82,14 +84,14 @@ public class Product extends BaseModel {
 
 
 
-	public String getSource_bject_id() {
-		return source_bject_id;
+	public String getSource_object_id() {
+		return source_object_id;
 	}
 
 
 
-	public void setSource_bject_id(String source_bject_id) {
-		this.source_bject_id = source_bject_id;
+	public void setSource_object_id(String source_bject_id) {
+		this.source_object_id = source_bject_id;
 	}
 
 
@@ -186,6 +188,18 @@ public class Product extends BaseModel {
 	public void setVersion(int version) {
 		this.version = version;
 	}
+	
+	
+
+	public Long getSalesRank() {
+		return salesRank;
+	}
+
+
+
+	public void setSalesRank(Long salesRank) {
+		this.salesRank = salesRank;
+	}
 
 
 
@@ -209,16 +223,56 @@ public class Product extends BaseModel {
 		this.updated_at = updated_at;
 	}
 
+	public static Product findBySourceOjbectId(String sourceObjectId) {
+		try {
+			EntityManager entityManager = MyEntityManagerFactory.getInstance();
+			return entityManager.createQuery("from " + Product.class.getName() + " where source_object_id = :sourceObjectId", Product.class).setParameter("sourceObjectId", sourceObjectId).getSingleResult();
+		} catch (NoResultException e) {
+			return null;			
+		}
 
+	}
 
-	public static Product createFromAwsApi(ItemLookupResponse ilr) {
-		SessionService ss = SessionService.getInstance();
+	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, int version) {
 
-		EntityManager entityManager = ss.getEntityManagerFactory().createEntityManager();
+		EntityManager entityManager = MyEntityManagerFactory.getInstance();
+		
+		Product p = findBySourceOjbectId(ilr.getSourceObjectId());
+		
 		entityManager.getTransaction().begin();
-		Product p = new Product(ilr.getSourceObjectId(), ilr.getCategoryId(), ilr.getRawXmlContentUrl(),
-				ilr.getRawHtmlContentUrl(), ilr.getDescirption(), ilr.getReviewUrl(),
-				ilr.getSpecificationUrl(), 1, 1);
+		
+		if (p != null) {
+			
+			// delete related images and attributes
+			String hqlDelete1 = "delete " + ProductImage.class.getName() + " where product_id = :productId";
+			int deletedEntities1 = entityManager.createQuery( hqlDelete1 )
+			                            .setParameter( "productId", p.getId() )
+			                            .executeUpdate();
+			
+			String hqlDelete2 = "delete " + ProductAttribute.class.getName() + " where product_id = :productId";
+			int deletedEntities2 = entityManager.createQuery( hqlDelete2 )
+			                            .setParameter( "productId", p.getId() )
+			                            .executeUpdate();	
+			
+			p.category_id = ilr.getCategoryId();
+			p.rawXmlContentUrl = ilr.getRawXmlContentUrl();
+			p.rawHtmlContentUrl = ilr.getRawHtmlContentUrl();
+			p.descirption = ilr.getDescirption();
+			p.reviewUrl = ilr.getReviewUrl();
+			p.specificationUrl = ilr.getSpecificationUrl();
+			p.salesRank = ilr.getSalesRank();
+			p.is_valid = 1;
+			p.version = version;
+			p.updated_at = new Date();					
+		} else {								
+		
+			p = new Product(ilr.getSourceObjectId(), ilr.getCategoryId(), ilr.getRawXmlContentUrl(),
+					ilr.getRawHtmlContentUrl(), ilr.getDescirption(), ilr.getReviewUrl(),
+					ilr.getSpecificationUrl(), ilr.getSalesRank(), 1, version);
+					
+		}
+		
+		// save or updated product
 		entityManager.persist(p);
 		
 		Iterator iterator = ilr.getImages().keySet().iterator();
@@ -240,8 +294,6 @@ public class Product extends BaseModel {
 
         
         entityManager.getTransaction().commit();
-        entityManager.close();		
-	    ss.releaseSession();
 
 
 		return p;
@@ -249,9 +301,8 @@ public class Product extends BaseModel {
 	}
 	
 	public static Long getMaxCategoryIdAlreadyExist(int version) {
-		SessionService ss = SessionService.getInstance();
 		try {
-			EntityManager entityManager = ss.getEntityManagerFactory().createEntityManager();
+			EntityManager entityManager = MyEntityManagerFactory.getInstance();
 			entityManager.getTransaction().begin();
 			
 			
@@ -259,23 +310,20 @@ public class Product extends BaseModel {
 
 			
 	        entityManager.getTransaction().commit();
-	        entityManager.close();
-	        ss.releaseSession();
 	        
 	        return maxId;
 	        
 		}catch(NoResultException e) {
-			ss.releaseSession();
 			return -1L;
 		}		
 	}
 	
 	public static void deleteAllProductsForCategory(int version, Long categoryId) {
-		SessionService ss = SessionService.getInstance();
+
 		try {
 	
 	
-			EntityManager entityManager = ss.getEntityManagerFactory().createEntityManager();
+			EntityManager entityManager = MyEntityManagerFactory.getInstance();
 			entityManager.getTransaction().begin();
 			
 			
@@ -309,10 +357,7 @@ public class Product extends BaseModel {
 	
 			
 	        entityManager.getTransaction().commit();
-	        entityManager.close();		
-		    ss.releaseSession();
 		}catch(NoResultException e) {
-			ss.releaseSession();
 			return;
 		}
 

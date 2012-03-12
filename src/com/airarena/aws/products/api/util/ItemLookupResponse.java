@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.airarena.hibernate.util.SessionService;
 import com.airarena.product.resources.*;
 import com.airarena.products.model.Product;
 
@@ -21,6 +20,7 @@ public class ItemLookupResponse extends BasicApiRespose {
 	private String reviewUrl;
 	private String specificationUrl;
 	private Long categoryId;
+	private Long salesRank = 0L;	
 	
 	private HashMap<String, Image> images = new HashMap<String, Image>();
 	private HashMap<Long, String> itemAttributes = new HashMap<Long, String>();
@@ -157,6 +157,16 @@ public class ItemLookupResponse extends BasicApiRespose {
 	}
 
 
+	public Long getSalesRank() {
+		return salesRank;
+	}
+
+
+	public void setSalesRank(Long salesRank) {
+		this.salesRank = salesRank;
+	}
+
+
 	@Override
 	public String toString() {
 		StringBuilder itms = new StringBuilder();
@@ -179,7 +189,8 @@ public class ItemLookupResponse extends BasicApiRespose {
 		return "ItemLookupResponse [sourceObjectId=" + sourceObjectId
 				+ ", rawXmlContentUrl=" + rawXmlContentUrl
 				+ ", rawHtmlContentUrl=" + rawHtmlContentUrl + ", descirption="
-				+ descirption + ", reviewUrl=" + reviewUrl
+				+ descirption + ", SalesRank=" 
+				+ this.salesRank + ", reviewUrl=" + reviewUrl
 				+ ", specificationUrl=" + specificationUrl + ", images="
 //				+ itms.toString() 
 				+ ", attributs=" +as.toString()  

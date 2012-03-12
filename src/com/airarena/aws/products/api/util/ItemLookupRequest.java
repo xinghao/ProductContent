@@ -22,6 +22,7 @@ public class ItemLookupRequest extends BasicApiRequest {
 	//private String tagSort = "Usages";
 	private boolean includeReviewsSummary = true;
 	private ItemLookupResponse ilr= null;
+
 	
 	public ItemLookupRequest(String sourceObjectId, int reviewPage, int tagPage) {
 		super();
@@ -126,6 +127,12 @@ public class ItemLookupRequest extends BasicApiRequest {
 		
 		expr = xpath.compile("//Item/ItemLinks/ItemLink/Description");
 		NodeList itemLinks = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+
+		expr = xpath.compile("//Item/SalesRank");
+		Node salesRankNode = (Node)expr.evaluate(doc, XPathConstants.NODE);
+		if (salesRankNode != null) {
+			this.ilr.setSalesRank(Long.valueOf(salesRankNode.getTextContent()));
+		}
 		
 		for (int i=0;i<itemLinks.getLength();i++) {
 			Node childNode = itemLinks.item(i);

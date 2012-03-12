@@ -1,550 +1,551 @@
-10 Mar 2012 01:02:15,962  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:15,962  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:15,962  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:15,962  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:15,996  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:15,996  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:15,996  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:15,996  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:16,036  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:16,036  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:16,036  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,036  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:16,037  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:16,365  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:16,365  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:16,366  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:16,366  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:16,388  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@bf1bb0de [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@72c2a9dc [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|1769df00, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@6fb79fab [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|36db492, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|27af8502, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:16,528  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:16,529  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:16,530  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:16,530  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:16,576  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:16,577  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:16,578  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:16,626  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:16,626  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:16,626  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,626  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:16,671  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:16,671  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:16,671  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,672  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:16,711  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:16,711  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:16,711  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,711  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:16,744  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:16,745  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:16,745  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,745  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:16,780  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:16,780  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:16,780  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,780  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:16,813  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:16,813  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:16,813  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:16,814  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:16,814  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:16,942  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:16,942  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:16,943  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:16,943  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:16,968  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@ba374fce [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@e1d9bd56 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|521ecfeb, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@4454a9f6 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|552297d7, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|64e4776b, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:17,086  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:17,086  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:17,087  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:17,087  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:17,118  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:17,118  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:17,120  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:17,175  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:17,175  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:17,175  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,175  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:17,220  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:17,220  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:17,220  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,220  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:17,260  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:17,260  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:17,260  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,260  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:17,303  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:17,303  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:17,303  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,303  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:17,345  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:17,346  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:17,346  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,346  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:17,388  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:17,388  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:17,389  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:17,389  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:17,389  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:20,438  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:20,438  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:20,438  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:20,438  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:20,466  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@bd1e5dda [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@c134fd9e [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|5c335297, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@5bba99a5 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|e776f7, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|2d7366cb, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:20,623  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:20,623  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:20,624  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:20,624  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:20,660  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:20,660  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:20,662  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:20,704  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:20,704  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:20,705  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,705  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:20,740  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:20,740  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:20,740  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,740  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:20,773  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:20,773  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:20,773  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,773  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:20,808  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:20,808  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:20,808  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,808  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:20,844  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:20,844  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:20,844  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,844  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:20,878  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:20,879  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:20,879  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:20,879  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:20,879  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:20,950  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:20,951  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:20,951  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:20,951  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:20,968  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@24508552 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@7d0c3e98 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|7e98f9c2, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@141c1199 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|5148bd9e, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|6d35707c, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:21,116  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:21,116  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:21,117  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:21,117  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:21,169  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:21,169  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:21,171  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:21,231  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:21,231  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:21,231  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,231  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:21,278  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:21,279  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:21,279  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,279  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:21,327  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:21,327  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:21,327  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,327  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:21,378  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:21,378  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:21,379  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,379  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:21,427  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:21,427  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:21,427  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,427  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:21,469  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:21,470  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:21,470  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,470  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:21,470  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:21,536  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:21,537  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:21,537  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:21,537  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:21,557  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@19f45290 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@8c5644d8 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|60f00e0f, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@1ca9c581 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|75da931b, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|302b2c81, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:21,701  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:21,702  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:21,702  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:21,702  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:21,730  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:21,730  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:21,731  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:21,778  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:21,778  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:21,778  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,778  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:21,815  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:21,815  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:21,816  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,816  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:21,855  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:21,855  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:21,855  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,855  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:21,888  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:21,888  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:21,888  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,889  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:21,921  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:21,921  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:21,922  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,922  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:21,954  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:21,954  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:21,954  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:21,954  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:21,954  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:22,006  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:22,006  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:22,006  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:22,006  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:22,022  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@711ce7ae [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@dbabf1df [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|44581ea2, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@eed80492 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|4d677979, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|754340bb, numHelperThreads -> 3 ]
-10 Mar 2012 01:02:22,138  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:02:22,139  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:02:22,139  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:02:22,139  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:02:22,168  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:02:22,168  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:02:22,170  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:02:22,222  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:02:22,222  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:02:22,222  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,222  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:02:22,257  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:02:22,257  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:02:22,257  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,257  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:02:22,291  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:02:22,291  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:02:22,291  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,291  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:02:22,326  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:02:22,326  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:02:22,326  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,326  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:02:22,361  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:02:22,361  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:02:22,361  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,361  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:02:22,402  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:02:22,402  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:02:22,402  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:02:22,402  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:02:22,403  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:02:22,475  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:02:22,475  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:02:22,475  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:02:22,475  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:02:22,493  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@4aeb9f2 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@bdecf507 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wqvis91luyavc|6a63afa4, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@cfce4596 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|3ef970e8, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wqvis91luyavc|5eba06ff, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:37,869  INFO  LoadConfig : Loading app config
-10 Mar 2012 01:14:37,870  INFO  LoadConfig : [Properties]Key=ENV, Value=production
-10 Mar 2012 01:14:37,871  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
-10 Mar 2012 01:14:37,871  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
-10 Mar 2012 01:14:38,035  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
-10 Mar 2012 01:14:38,042  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
-10 Mar 2012 01:14:38,043  INFO  Environment : HHH000206: hibernate.properties not found
-10 Mar 2012 01:14:38,045  INFO  Environment : HHH000021: Bytecode provider name : javassist
-10 Mar 2012 01:14:38,516  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:38,530  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:38,530  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:38,530  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:38,549  INFO  MLog : MLog clients using log4j logging.
-10 Mar 2012 01:14:38,694  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
-10 Mar 2012 01:14:38,766  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@88d69c2c [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@f360b8e2 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|5a940f82, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@582b5365 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|d5e92d7, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|77bc1fb9, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:39,064  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:39,071  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:39,080  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:39,084  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:39,292  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:39,292  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:39,296  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:39,349  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:39,349  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:39,350  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,350  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:39,386  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:39,386  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:39,386  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,386  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:39,428  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:39,428  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:39,428  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,428  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:39,462  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:39,462  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:39,462  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,462  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:39,495  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:39,496  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:39,496  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,496  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:39,530  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:39,530  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:39,530  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:39,530  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:39,531  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:39,851  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:39,851  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:39,852  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:39,852  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:39,873  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@436a07b6 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@dcd13e3e [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|565539d8, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@614b0d8e [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|2e39d325, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|7548c02f, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:40,013  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:40,014  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:40,015  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:40,015  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:40,055  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:40,055  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:40,056  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:40,099  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:40,099  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:40,099  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,099  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:40,138  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:40,138  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:40,138  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,138  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:40,178  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:40,178  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:40,178  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,178  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:40,217  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:40,217  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:40,217  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,218  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:40,252  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:40,252  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:40,252  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,252  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:40,286  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:40,286  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:40,286  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:40,286  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:40,287  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:42,889  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:42,889  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:42,889  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:42,889  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:42,915  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@51d561c0 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@f7551f4b [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|7b41a32f, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@802c33fc [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|32554189, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|1240a1e1, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:43,045  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:43,045  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:43,046  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:43,046  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:43,084  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:43,085  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:43,086  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:43,140  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:43,140  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:43,140  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,140  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:43,182  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:43,182  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:43,182  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,182  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:43,227  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:43,227  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:43,227  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,227  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:43,268  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:43,268  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:43,268  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,268  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:43,305  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:43,305  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:43,305  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,305  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:43,338  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:43,338  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:43,338  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,338  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:43,338  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:43,414  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:43,414  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:43,414  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:43,414  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:43,435  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@8fc74b0c [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@93ddead0 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|5c335297, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@95c12b57 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|e776f7, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|2d7366cb, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:43,573  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:43,574  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:43,574  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:43,574  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:43,606  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:43,606  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:43,608  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:43,653  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:43,653  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:43,653  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,654  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:43,688  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:43,688  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:43,688  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,688  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:43,721  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:43,721  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:43,721  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,721  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:43,755  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:43,755  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:43,756  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,756  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:43,790  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:43,790  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:43,790  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,790  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:43,824  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:43,824  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:43,824  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:43,824  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:43,825  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:43,895  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:43,896  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:43,896  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:43,896  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:43,910  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@aaac689d [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@e6489140 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|6197cc, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@5b7b3e7a [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|2e5f8245, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|734d246, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:44,035  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:44,036  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:44,036  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:44,037  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:44,079  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:44,079  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:44,081  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:44,136  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:44,136  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:44,137  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,137  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:44,177  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:44,177  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:44,177  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,177  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:44,222  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:44,223  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:44,223  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,223  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:44,267  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:44,267  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:44,267  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,267  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:44,312  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:44,312  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:44,312  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,312  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:44,351  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:44,351  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:44,351  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,351  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:44,351  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:44,415  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:44,415  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:44,415  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:44,415  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:44,434  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@92407279 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@6d1d51a9 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|4dfd9726, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@7f9e32dd [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|450ae3fb, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|43ce67ca, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:44,603  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:44,604  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:44,604  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:44,604  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:44,626  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:44,627  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:44,628  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:44,672  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:44,672  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:44,672  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,672  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:44,706  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:44,707  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:44,707  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,707  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:44,739  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:44,740  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:44,740  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,740  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:44,773  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:44,773  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:44,773  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,773  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:44,807  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:44,807  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:44,807  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,807  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:44,840  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:44,840  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:44,840  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:44,840  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:44,840  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:44,899  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:44,900  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:44,900  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:44,900  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:44,918  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@a0fcc5df [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@fd4cc9e4 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|12da89a7, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@bfcf3924 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|5cfe174, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|49833c9c, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:45,062  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:45,062  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:45,063  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:45,063  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:45,102  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:45,102  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:45,103  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:45,161  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:45,161  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:45,161  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,161  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:45,199  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:45,199  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:45,199  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,199  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:45,242  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:45,242  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:45,242  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,242  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:45,284  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:45,284  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:45,284  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,284  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:45,327  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:45,327  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:45,327  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,327  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:45,362  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:45,362  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:45,362  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,362  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:45,363  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:45,430  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:45,431  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:45,431  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:45,431  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
-10 Mar 2012 01:14:45,445  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@783b3e81 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@f3d85869 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 2rvxtw8l1wrbggp16pgctd|62efae3b, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@b16aefd4 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|28169674, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 2rvxtw8l1wrbggp16pgctd|5371ef98, numHelperThreads -> 3 ]
-10 Mar 2012 01:14:45,568  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
-10 Mar 2012 01:14:45,568  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
-10 Mar 2012 01:14:45,569  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
-10 Mar 2012 01:14:45,569  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
-10 Mar 2012 01:14:45,604  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
-10 Mar 2012 01:14:45,604  INFO  SchemaUpdate : HHH000102: Fetching database metadata
-10 Mar 2012 01:14:45,607  INFO  SchemaUpdate : HHH000396: Updating schema
-10 Mar 2012 01:14:45,663  INFO  TableMetadata : HHH000261: Table found: public.categories
-10 Mar 2012 01:14:45,663  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
-10 Mar 2012 01:14:45,663  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,663  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
-10 Mar 2012 01:14:45,709  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
-10 Mar 2012 01:14:45,709  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
-10 Mar 2012 01:14:45,709  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,709  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
-10 Mar 2012 01:14:45,748  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
-10 Mar 2012 01:14:45,749  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
-10 Mar 2012 01:14:45,749  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,749  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
-10 Mar 2012 01:14:45,783  INFO  TableMetadata : HHH000261: Table found: public.product_images
-10 Mar 2012 01:14:45,783  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
-10 Mar 2012 01:14:45,783  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,783  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
-10 Mar 2012 01:14:45,829  INFO  TableMetadata : HHH000261: Table found: public.products
-10 Mar 2012 01:14:45,829  INFO  TableMetadata : HHH000037: Columns: [id, source_bject_id, specificationurl, rawhtmlcontenturl, descirption, updated_at, reviewurl, created_at, category_id, rawxmlcontenturl, version, is_valid]
-10 Mar 2012 01:14:45,829  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,829  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
-10 Mar 2012 01:14:45,870  INFO  TableMetadata : HHH000261: Table found: public.providers
-10 Mar 2012 01:14:45,870  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
-10 Mar 2012 01:14:45,870  INFO  TableMetadata : HHH000108: Foreign keys: []
-10 Mar 2012 01:14:45,870  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
-10 Mar 2012 01:14:45,871  INFO  SchemaUpdate : HHH000232: Schema update complete
-10 Mar 2012 01:14:45,934  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
-10 Mar 2012 01:14:45,935  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
-10 Mar 2012 01:14:45,935  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
-10 Mar 2012 01:14:45,935  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:18:44,782  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:18:44,782  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:18:44,815  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:18:44,815  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:18:44,815  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:18:44,815  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:18:44,816  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:20:11,570  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:20:11,572  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:20:11,572  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:20:11,572  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:20:14,170  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:20:14,176  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:20:14,177  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:20:14,178  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:20:14,620  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:20:14,632  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:20:14,632  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:20:14,632  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:20:14,646  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:20:14,724  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:20:14,785  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@e3e4e0b5 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@174e07f2 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1d5e871x25sjv|255b5c1f, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@67abb87b [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d5e871x25sjv|1a5a58e0, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d5e871x25sjv|5092eb76, numHelperThreads -> 3 ]
+12 Mar 2012 14:20:15,060  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:20:15,070  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:20:15,080  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:20:15,084  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:20:15,287  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:20:15,288  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:20:15,292  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:20:15,348  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:20:15,348  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:20:15,348  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,348  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:20:15,386  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:20:15,387  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:20:15,387  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,387  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:20:15,425  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:20:15,425  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:20:15,425  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,425  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:20:15,461  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:20:15,461  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:20:15,461  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,461  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:20:15,493  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:20:15,493  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:20:15,493  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,493  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:20:15,528  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:20:15,528  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:20:15,528  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:20:15,528  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:20:15,529  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:21:17,239  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:21:17,240  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:21:17,241  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:21:17,241  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:21:35,144  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:21:35,229  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:21:35,251  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:21:35,267  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:21:42,071  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:21:42,116  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:21:42,118  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:21:42,119  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:21:42,264  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:21:43,144  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:21:44,325  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@6de53b8d [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@d05d86b5 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1d7a1r1hxugq5|3bd6bff7, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@827fc052 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d7a1r1hxugq5|4c6030f9, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d7a1r1hxugq5|272b72f4, numHelperThreads -> 3 ]
+12 Mar 2012 14:21:46,204  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:21:46,347  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:21:46,523  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:21:46,585  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:21:50,007  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:21:50,008  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:21:50,038  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:21:50,264  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:21:50,265  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:21:50,267  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:50,268  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:21:50,455  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:21:50,457  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:21:50,458  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:50,459  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:21:50,649  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:21:50,651  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:21:50,652  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:50,653  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:21:50,840  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:21:50,842  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:21:50,843  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:50,844  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:21:51,052  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:21:51,054  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:21:51,056  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:51,057  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:21:51,231  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:21:51,232  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:21:51,233  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:21:51,235  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:21:51,248  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:22:46,883  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:22:46,884  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:22:46,884  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:22:46,884  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:22:47,047  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:22:47,057  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:22:47,059  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:22:47,061  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:22:47,510  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:22:47,522  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:22:47,523  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:22:47,523  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:22:47,541  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:22:47,668  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:22:47,724  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@903e73b3 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@8ca1b489 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1d8o8ptc0t8y|669a4cb, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@50ba760c [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d8o8ptc0t8y|2344b18f, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d8o8ptc0t8y|3e68cd79, numHelperThreads -> 3 ]
+12 Mar 2012 14:22:47,983  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:22:47,991  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:22:48,002  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:22:48,007  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:22:48,206  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:22:48,207  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:22:48,210  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:22:48,261  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:22:48,261  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:22:48,261  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,261  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:22:48,298  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:22:48,299  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:22:48,299  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,299  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:22:48,342  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:22:48,343  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:22:48,343  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,343  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:22:48,376  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:22:48,376  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:22:48,377  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,377  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:22:48,410  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:22:48,410  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:22:48,410  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,410  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:22:48,444  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:22:48,445  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:22:48,445  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:22:48,445  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:22:48,446  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:23:03,961  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:23:03,963  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:23:03,963  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:23:03,963  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:23:04,142  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:23:04,151  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:23:04,153  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:23:04,155  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:23:04,662  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:23:04,677  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:23:04,677  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:23:04,678  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:23:04,699  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:23:04,849  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:23:04,911  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@2a6b8f3c [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@14e88368 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1d91hgrll17s|155b6116, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@b4ae7652 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d91hgrll17s|1aa632be, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1d91hgrll17s|2c79cd09, numHelperThreads -> 3 ]
+12 Mar 2012 14:23:05,212  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:23:05,223  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:23:05,233  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:23:05,238  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:23:05,480  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:23:05,480  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:23:05,486  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:23:05,540  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:23:05,540  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:23:05,540  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,540  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:23:05,577  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:23:05,577  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:23:05,577  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,577  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:23:05,618  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:23:05,619  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:23:05,619  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,619  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:23:05,653  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:23:05,653  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:23:05,653  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,653  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:23:05,686  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:23:05,686  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:23:05,686  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,686  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:23:05,719  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:23:05,719  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:23:05,720  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:23:05,720  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:23:05,721  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:24:44,066  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:24:44,067  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:24:44,067  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:24:44,067  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:24:44,225  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:24:44,233  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:24:44,234  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:24:44,236  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:24:44,716  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:24:44,733  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:24:44,733  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:24:44,733  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:24:44,757  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:24:44,910  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:24:44,978  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@34aec72f [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@eaae88ac [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1db6p41r5w79k|2e864e43, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@d0a2eeaf [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1db6p41r5w79k|3bfa681c, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1db6p41r5w79k|5fc6e818, numHelperThreads -> 3 ]
+12 Mar 2012 14:24:45,246  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:24:45,253  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:24:45,261  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:24:45,264  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:24:45,457  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:24:45,458  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:24:45,464  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:24:45,513  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:24:45,513  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:24:45,513  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,514  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:24:45,550  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:24:45,550  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:24:45,550  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,550  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:24:45,590  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:24:45,591  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:24:45,591  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,591  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:24:45,626  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:24:45,626  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:24:45,626  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,626  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:24:45,658  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:24:45,658  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:24:45,658  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,659  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:24:45,692  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:24:45,692  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:24:45,692  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:24:45,692  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:24:45,693  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:25:30,851  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:25:30,852  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:25:30,853  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:25:30,853  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:25:31,014  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:25:31,023  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:25:31,025  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:25:31,026  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:25:31,475  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:25:31,489  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:25:31,489  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:25:31,489  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:25:31,509  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:25:31,647  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:25:31,710  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@9cdef34a [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@56b5527 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1dc6rll8qof3|5c4b82d2, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@8430401a [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1dc6rll8qof3|19e09a4, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1dc6rll8qof3|4b7f1841, numHelperThreads -> 3 ]
+12 Mar 2012 14:25:31,963  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:25:31,970  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:25:31,979  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:25:31,983  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:25:32,194  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:25:32,195  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:25:32,200  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:25:32,261  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:25:32,262  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:25:32,262  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:25:32,262  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:25:32,265  INFO  DatabaseMetaData : HHH000262: Table not found: product_attribute_meta_keys
+12 Mar 2012 14:25:32,317  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:25:32,317  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:25:32,317  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:25:32,318  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:25:32,363  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:25:32,363  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:25:32,363  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:25:32,363  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:25:32,401  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:25:32,401  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:25:32,401  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:25:32,401  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:25:32,403  INFO  DatabaseMetaData : HHH000262: Table not found: providers
+12 Mar 2012 14:25:32,405  INFO  DatabaseMetaData : HHH000262: Table not found: product_attribute_meta_keys
+12 Mar 2012 14:25:32,407  INFO  DatabaseMetaData : HHH000262: Table not found: providers
+12 Mar 2012 14:25:32,437  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:26:17,104  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:26:17,105  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:26:17,105  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:26:17,105  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:26:27,835  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:26:27,842  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:26:27,843  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:26:27,845  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:26:28,321  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:26:28,336  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:26:28,336  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:26:28,336  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:26:28,351  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:26:28,436  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:26:28,509  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@ed40cc94 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@21881e51 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1ddekv10sogha|4a0ece36, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@d39f4ace [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1ddekv10sogha|79ec41c0, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1ddekv10sogha|2b1bed2, numHelperThreads -> 3 ]
+12 Mar 2012 14:26:28,789  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:26:28,798  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:26:28,810  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:26:28,814  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:26:29,080  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:26:29,080  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:26:29,084  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:26:29,135  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:26:29,135  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:26:29,135  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,135  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:26:29,172  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:26:29,172  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:26:29,172  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,172  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:26:29,220  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:26:29,220  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:26:29,220  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,220  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:26:29,260  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:26:29,260  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:26:29,260  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,260  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:26:29,294  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:26:29,294  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:26:29,294  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,294  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:26:29,326  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:26:29,326  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:26:29,326  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:26:29,326  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:26:29,327  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:29:07,636  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:29:07,637  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:29:07,637  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:29:07,637  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:29:09,004  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:29:09,010  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:29:09,012  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:29:09,013  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:29:09,397  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:29:09,416  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:29:09,417  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:29:09,417  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:29:09,436  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:29:09,514  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:29:09,566  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@84dcf5ca [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@afd038a9 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1dguvi1hul15g|54ec115b, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@fb599666 [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1dguvi1hul15g|1ff243d1, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1dguvi1hul15g|50dfc362, numHelperThreads -> 3 ]
+12 Mar 2012 14:29:09,817  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:29:09,824  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:29:09,832  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:29:09,835  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:29:10,018  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:29:10,018  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:29:10,022  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:29:10,075  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:29:10,076  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:29:10,076  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,076  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:29:10,111  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:29:10,111  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:29:10,111  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,111  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:29:10,150  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:29:10,151  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:29:10,151  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,151  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:29:10,184  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:29:10,184  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:29:10,184  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,184  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:29:10,217  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:29:10,217  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, source_object_id, id, source_bject_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:29:10,217  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,217  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:29:10,251  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:29:10,251  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:29:10,251  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:29:10,251  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:29:10,252  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:56:21,548  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:56:21,549  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:56:21,549  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:56:21,549  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:56:21,701  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:56:21,710  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:56:21,712  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:56:21,713  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:56:22,169  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:56:22,181  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:56:22,181  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:56:22,181  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:56:22,201  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:56:22,329  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:56:22,389  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@a980349b [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@a7b09f07 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1efurhj6jk0c|737c2891, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@c989c36c [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1efurhj6jk0c|34c92507, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1efurhj6jk0c|7bafb0c7, numHelperThreads -> 3 ]
+12 Mar 2012 14:56:22,651  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:56:22,658  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:56:22,666  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:56:22,669  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:56:22,868  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:56:22,868  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:56:22,873  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:56:22,923  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:56:22,923  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:56:22,923  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:22,923  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:56:22,957  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:56:22,958  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:56:22,958  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:22,958  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:56:22,961  INFO  DatabaseMetaData : HHH000262: Table not found: product_attributes
+12 Mar 2012 14:56:22,963  INFO  DatabaseMetaData : HHH000262: Table not found: product_images
+12 Mar 2012 14:56:22,966  INFO  DatabaseMetaData : HHH000262: Table not found: products
+12 Mar 2012 14:56:23,009  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:56:23,009  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:56:23,009  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:23,009  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:56:23,012  INFO  DatabaseMetaData : HHH000262: Table not found: product_attributes
+12 Mar 2012 14:56:23,015  INFO  DatabaseMetaData : HHH000262: Table not found: product_images
+12 Mar 2012 14:56:23,016  INFO  DatabaseMetaData : HHH000262: Table not found: products
+12 Mar 2012 14:56:23,063  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:56:57,047  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:56:57,049  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:56:57,049  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:56:57,049  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:56:57,216  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:56:57,224  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:56:57,226  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:56:57,228  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:56:57,677  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:56:57,695  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:56:57,695  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:56:57,695  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:56:57,718  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:56:57,845  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:56:57,901  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@3c5be8d9 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@a4e84ab6 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1egm611l3hsvp|5c4b82d2, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@4f86dcab [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1egm611l3hsvp|19e09a4, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1egm611l3hsvp|4b7f1841, numHelperThreads -> 3 ]
+12 Mar 2012 14:56:58,158  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:56:58,165  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:56:58,173  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:56:58,176  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:56:58,369  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:56:58,369  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:56:58,373  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:56:58,422  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:56:58,422  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:56:58,422  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,422  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:56:58,458  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 14:56:58,458  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 14:56:58,458  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,459  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 14:56:58,494  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 14:56:58,495  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 14:56:58,495  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,495  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 14:56:58,528  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 14:56:58,528  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 14:56:58,528  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,528  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 14:56:58,561  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 14:56:58,561  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, id, source_object_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 14:56:58,561  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,561  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 14:56:58,593  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 14:56:58,593  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 14:56:58,593  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:56:58,593  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 14:56:58,594  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 14:59:04,358  INFO  LoadConfig : Loading app config
+12 Mar 2012 14:59:04,359  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 14:59:04,360  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 14:59:04,360  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 14:59:04,515  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 14:59:04,524  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 14:59:04,525  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 14:59:04,527  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 14:59:04,958  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 14:59:04,972  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 14:59:04,973  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 14:59:04,973  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 14:59:04,992  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 14:59:05,125  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 14:59:05,192  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@5c520e49 [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@c4de7026 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1ejcdlm7950k|5c4b82d2, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@e7e493b [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1ejcdlm7950k|19e09a4, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1ejcdlm7950k|4b7f1841, numHelperThreads -> 3 ]
+12 Mar 2012 14:59:05,448  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 14:59:05,455  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 14:59:05,462  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 14:59:05,466  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 14:59:05,652  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 14:59:05,652  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 14:59:05,657  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 14:59:05,709  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 14:59:05,709  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 14:59:05,709  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 14:59:05,709  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 14:59:05,712  INFO  DatabaseMetaData : HHH000262: Table not found: product_attribute_meta_keys
+12 Mar 2012 14:59:05,714  INFO  DatabaseMetaData : HHH000262: Table not found: product_attributes
+12 Mar 2012 14:59:05,716  INFO  DatabaseMetaData : HHH000262: Table not found: product_images
+12 Mar 2012 14:59:05,719  INFO  DatabaseMetaData : HHH000262: Table not found: products
+12 Mar 2012 14:59:05,723  INFO  DatabaseMetaData : HHH000262: Table not found: providers
+12 Mar 2012 14:59:05,728  INFO  DatabaseMetaData : HHH000262: Table not found: product_attribute_meta_keys
+12 Mar 2012 14:59:05,730  INFO  DatabaseMetaData : HHH000262: Table not found: product_attributes
+12 Mar 2012 14:59:05,734  INFO  DatabaseMetaData : HHH000262: Table not found: product_images
+12 Mar 2012 14:59:05,736  INFO  DatabaseMetaData : HHH000262: Table not found: products
+12 Mar 2012 14:59:05,738  INFO  DatabaseMetaData : HHH000262: Table not found: providers
+12 Mar 2012 14:59:05,797  INFO  SchemaUpdate : HHH000232: Schema update complete
+12 Mar 2012 15:21:09,585  INFO  LoadConfig : Loading app config
+12 Mar 2012 15:21:09,586  INFO  LoadConfig : [Properties]Key=ENV, Value=production
+12 Mar 2012 15:21:09,586  INFO  LoadConfig : [Properties]Key=AWS_ENDPOINT, Value=ecs.amazonaws.com
+12 Mar 2012 15:21:09,586  INFO  LoadConfig : [Properties]Key=AWS_API_VERSION, Value=2011-08-01
+12 Mar 2012 15:21:09,741  INFO  Version : HCANN000001: Hibernate Commons Annotations {4.0.1.Final}
+12 Mar 2012 15:21:09,750  INFO  Version : HHH000412: Hibernate Core {4.1.0.Final}
+12 Mar 2012 15:21:09,752  INFO  Environment : HHH000206: hibernate.properties not found
+12 Mar 2012 15:21:09,754  INFO  Environment : HHH000021: Bytecode provider name : javassist
+12 Mar 2012 15:21:10,208  INFO  ConnectionProviderInitiator : HHH000130: Instantiating explicit connection provider: org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider
+12 Mar 2012 15:21:10,223  INFO  C3P0ConnectionProvider : HHH010002: C3P0 using driver: org.postgresql.Driver at URL: jdbc:postgresql://127.0.0.1:5432/product_content
+12 Mar 2012 15:21:10,223  INFO  C3P0ConnectionProvider : HHH000046: Connection properties: {user=postgres, password=****, autocommit=true, release_mode=auto}
+12 Mar 2012 15:21:10,223  INFO  C3P0ConnectionProvider : HHH000006: Autocommit mode: true
+12 Mar 2012 15:21:10,240  INFO  MLog : MLog clients using log4j logging.
+12 Mar 2012 15:21:10,375  INFO  C3P0Registry : Initializing c3p0-0.9.1 [built 16-January-2007 14:46:42; debug? true; trace: 10]
+12 Mar 2012 15:21:10,437  INFO  AbstractPoolBackedDataSource : Initializing c3p0 pool... com.mchange.v2.c3p0.PoolBackedDataSource@fc16313d [ connectionPoolDataSource -> com.mchange.v2.c3p0.WrapperConnectionPoolDataSource@fa469ba9 [ acquireIncrement -> 3, acquireRetryAttempts -> 30, acquireRetryDelay -> 1000, autoCommitOnClose -> false, automaticTestTable -> null, breakAfterAcquireFailure -> false, checkoutTimeout -> 0, connectionCustomizerClassName -> null, connectionTesterClassName -> com.mchange.v2.c3p0.impl.DefaultConnectionTester, debugUnreturnedConnectionStackTraces -> false, factoryClassLocation -> null, forceIgnoreUnresolvedTransactions -> false, identityToken -> 1hge6508m1fbqy26cy5av|737c2891, idleConnectionTestPeriod -> 300, initialPoolSize -> 3, maxAdministrativeTaskTime -> 0, maxConnectionAge -> 0, maxIdleTime -> 300, maxIdleTimeExcessConnections -> 0, maxPoolSize -> 30, maxStatements -> 500, maxStatementsPerConnection -> 0, minPoolSize -> 5, nestedDataSource -> com.mchange.v2.c3p0.DriverManagerDataSource@1c1fc00e [ description -> null, driverClass -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1fbqy26cy5av|34c92507, jdbcUrl -> jdbc:postgresql://127.0.0.1:5432/product_content, properties -> {user=******, password=******, autocommit=true, release_mode=auto} ], preferredTestQuery -> null, propertyCycle -> 0, testConnectionOnCheckin -> false, testConnectionOnCheckout -> false, unreturnedConnectionTimeout -> 0, usesTraditionalReflectiveProxies -> false; userOverrides: {} ], dataSourceName -> null, factoryClassLocation -> null, identityToken -> 1hge6508m1fbqy26cy5av|7bafb0c7, numHelperThreads -> 3 ]
+12 Mar 2012 15:21:10,703  INFO  Dialect : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL81Dialect
+12 Mar 2012 15:21:10,710  INFO  LobCreatorBuilder : HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+12 Mar 2012 15:21:10,718  INFO  TransactionFactoryInitiator : HHH000268: Transaction strategy: org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+12 Mar 2012 15:21:10,721  INFO  ASTQueryTranslatorFactory : HHH000397: Using ASTQueryTranslatorFactory
+12 Mar 2012 15:21:10,911  INFO  SchemaUpdate : HHH000228: Running hbm2ddl schema update
+12 Mar 2012 15:21:10,911  INFO  SchemaUpdate : HHH000102: Fetching database metadata
+12 Mar 2012 15:21:10,915  INFO  SchemaUpdate : HHH000396: Updating schema
+12 Mar 2012 15:21:11,012  INFO  TableMetadata : HHH000261: Table found: public.categories
+12 Mar 2012 15:21:11,012  INFO  TableMetadata : HHH000037: Columns: [source_object_id, id, updated_at, permalink, provider_id, name, created_at, subcategories_count, version, parent_id]
+12 Mar 2012 15:21:11,013  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,013  INFO  TableMetadata : HHH000126: Indexes: [categories_pkey]
+12 Mar 2012 15:21:11,049  INFO  TableMetadata : HHH000261: Table found: public.product_attribute_meta_keys
+12 Mar 2012 15:21:11,049  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, provider_id, description, name, created_at, is_valid]
+12 Mar 2012 15:21:11,049  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,050  INFO  TableMetadata : HHH000126: Indexes: [product_attribute_meta_keys_pkey, myproductattributenameindex]
+12 Mar 2012 15:21:11,092  INFO  TableMetadata : HHH000261: Table found: public.product_attributes
+12 Mar 2012 15:21:11,092  INFO  TableMetadata : HHH000037: Columns: [product_attribute_meta_key_id, id, updated_at, product_id, value, created_at, version, is_valid]
+12 Mar 2012 15:21:11,092  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,092  INFO  TableMetadata : HHH000126: Indexes: [product_attributes_pkey, myproductattributeproductidindex]
+12 Mar 2012 15:21:11,131  INFO  TableMetadata : HHH000261: Table found: public.product_images
+12 Mar 2012 15:21:11,131  INFO  TableMetadata : HHH000037: Columns: [id, weight, updated_at, height, product_id, image_category, created_at, url, version, is_valid]
+12 Mar 2012 15:21:11,131  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,131  INFO  TableMetadata : HHH000126: Indexes: [product_images_pkey, myproductimageproductidindex]
+12 Mar 2012 15:21:11,164  INFO  TableMetadata : HHH000261: Table found: public.products
+12 Mar 2012 15:21:11,164  INFO  TableMetadata : HHH000037: Columns: [descirption, rawhtmlcontenturl, category_id, reviewurl, is_valid, version, id, source_object_id, specificationurl, updated_at, salesrank, created_at, rawxmlcontenturl]
+12 Mar 2012 15:21:11,164  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,164  INFO  TableMetadata : HHH000126: Indexes: [products_pkey, myproductcategoryindex]
+12 Mar 2012 15:21:11,199  INFO  TableMetadata : HHH000261: Table found: public.providers
+12 Mar 2012 15:21:11,199  INFO  TableMetadata : HHH000037: Columns: [id, updated_at, permalink, name, created_at]
+12 Mar 2012 15:21:11,199  INFO  TableMetadata : HHH000108: Foreign keys: []
+12 Mar 2012 15:21:11,199  INFO  TableMetadata : HHH000126: Indexes: [providers_pkey]
+12 Mar 2012 15:21:11,200  INFO  SchemaUpdate : HHH000232: Schema update complete

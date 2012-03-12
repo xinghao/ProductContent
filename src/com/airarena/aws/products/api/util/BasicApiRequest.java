@@ -27,6 +27,8 @@ public abstract class BasicApiRequest {
 	public static final String AWS_CONTENT_SPECIFICATION = "Technical Details";
 	public static final String AWS_CONTENT_DESCRIPTION_SOURCE = "Product Description";
 	
+	public static final String AWS_SORT_US_ELECTRONIC_DESC = "price";
+	
 	public static final String AWS_VALUE_SEPARATER = "|||||";
 	
 	public static final String AWS_RESPONSE_GROUP_ITEMLOOKUP = AWS_RESPONSE_GROUP_EDITORIALREVIEW +

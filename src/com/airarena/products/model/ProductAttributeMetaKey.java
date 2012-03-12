@@ -1,6 +1,7 @@
 package com.airarena.products.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 
-import com.airarena.hibernate.util.SessionService;
+import com.airarena.hibernate.util.MyEntityManagerFactory;
 
 @Entity
 @Table( name = "product_attribute_meta_keys" )
@@ -30,6 +31,8 @@ public class ProductAttributeMetaKey extends BaseModel {
     private int is_valid = 1;
     private Date created_at;
     private Date updated_at;	
+    
+    private static HashMap<String, ProductAttributeMetaKey> keys = null;
 
 	public ProductAttributeMetaKey() {
 		// this form used by Hibernate
@@ -41,31 +44,22 @@ public class ProductAttributeMetaKey extends BaseModel {
 		this.updated_at = this.created_at = new Date();		
 	}	
 
+	private static void loadKeys() {
+		ProductAttributeMetaKey.keys = new HashMap<String, ProductAttributeMetaKey>();
+		
+		EntityManager em = MyEntityManagerFactory.getInstance();
+		List<ProductAttributeMetaKey> metaKeys = em.createQuery("from " + ProductAttributeMetaKey.class.getName(), ProductAttributeMetaKey.class).getResultList();
+		for (ProductAttributeMetaKey metaKey : metaKeys) {
+			keys.put(metaKey.getName().toLowerCase(), metaKey);
+		}
+		
+	}
 	
 	public static ProductAttributeMetaKey getProductAttributeByName(String name) {
-		SessionService ss = SessionService.getInstance();
-		try {
-			EntityManager entityManager = ss.getEntityManagerFactory().createEntityManager();
-			entityManager.getTransaction().begin();
-			System.out.println(name);
-			if (entityManager.createQuery( "from " + ProductAttributeMetaKey.class.getName() + " where name='" + name.toLowerCase() +"'", ProductAttributeMetaKey.class ).getMaxResults() > 0) {
-				ProductAttributeMetaKey result = entityManager.createQuery( "from " + ProductAttributeMetaKey.class.getName() + " where name='" + name.toLowerCase() +"'", ProductAttributeMetaKey.class ).getSingleResult();
-		        entityManager.getTransaction().commit();
-		        entityManager.close();		
-		        ss.releaseSession();
-		        return result;
-
-			}else {
-		        entityManager.getTransaction().commit();
-		        entityManager.close();		
-		        ss.releaseSession();
-		        return null;
-			}
-		}catch(NoResultException e) {
-			ss.releaseSession();
-			return null;
-		}
-        
+        if (keys == null) {
+        	loadKeys();
+        }
+        return keys.get(name.toLowerCase());
 	}
 	
 	@Id

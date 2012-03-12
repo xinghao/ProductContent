@@ -20,7 +20,6 @@ import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
 import com.airarena.aws.products.api.util.ItemLookupResponse;
-import com.airarena.hibernate.util.SessionService;
 import com.airarena.product.resources.Image;
 
 @Entity

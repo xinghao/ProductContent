@@ -31,24 +31,24 @@
 
         <properties>
         
-        	<!-- local 
+        	<!-- local -->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/product_content" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="postgres" />
-			-->
+
 			
 
-        	<!-- product --> 
+        	<!-- product  
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/product_content" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="wanU2e8a" />
-
+			-->
 			
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" /> 
-            <!-- <property name="hibernate.hbm2ddl.auto" value="create"> -->  
+            <!-- <property name="hibernate.hbm2ddl.auto" value="create" />  -->
             
 			<property name="connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
 			<property name="hibernate.c3p0.min_size" value="5"/>

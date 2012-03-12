@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.airarena.hibernate.util.SessionService;
+import com.airarena.hibernate.util.MyEntityManagerFactory;
 
 @Entity
 @Table( name = "categories" )
@@ -144,20 +144,16 @@ public class Category extends BaseModel{
 	}
 	
 	public static List<Category> getLeafCatgories(Long categoryId) {
-		SessionService ss = SessionService.getInstance();
 		try {
-			EntityManager entityManager = ss.getEntityManagerFactory().createEntityManager();
+			EntityManager entityManager = MyEntityManagerFactory.getInstance();
 			entityManager.getTransaction().begin();
 			
 			List<Category> results = entityManager.createQuery( "from " + Category.class.getName() + " where subcategories_count = 0 order by id", Category.class ).getResultList();
 			
 	        entityManager.getTransaction().commit();
-	        entityManager.close();
-	        ss.releaseSession();
 	        
 	        return results;
 		}catch(NoResultException e) {
-			ss.releaseSession();
 			return null;
 		}
         
