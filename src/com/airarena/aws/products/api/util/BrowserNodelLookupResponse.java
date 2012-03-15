@@ -64,5 +64,42 @@ public class BrowserNodelLookupResponse extends BasicApiRespose {
 			"[ItemsList:" + childrens.toString() + "]";
 		     		
 	}
+
+	@Override
+	public boolean isValidate() {
+		boolean success = true;
+		System.out.println("Validate Browser Node Lookup response =====================");
+
+		if (!BasicApiRespose.validateString(this.getSourceObjectId())) {
+			System.out.println("source object test failed!");
+			success = false;			
+		}
+		
+		if (!BasicApiRespose.validateString(this.getName())) {
+			System.out.println("Name test failed!");
+			success = false;			
+		}
+
+		if (!BasicApiRespose.validateString(this.getParentSourceObjectId())) {
+			System.out.println("ParentsourceObjectId test failed!");
+			success = false;			
+		}
+		
+		if (!BasicApiRespose.validateList(this.getChildrenSourceObjectId())) {
+			System.out.println("Children list failed!");
+			success = false;			
+		}
+	
+		
+
+		if (!success) {
+			System.out.println("Browser Node Lookup test failed!!!!!!!!!!!!!!!!!");
+		} else {
+			System.out.println("Browser Node Lookup test passed!!!!!!!!!!!!!!!!!");
+		}
+		
+		return success;
+		
+	}
 	
 }

@@ -38,7 +38,7 @@ public class ProductContent {
 
 		BasicApiRequest bar = new BrowserNodeLookupRequest(sourceObjectId);
 		BrowserNodelLookupResponse b = (BrowserNodelLookupResponse) bar.call();
-		Category c = new Category(b.getName(), sourceObjectId, null, parentId, b.getChildrenSourceObjectId().size(), -1);
+		Category c = new Category(b.getName(), sourceObjectId, null, parentId, b.getChildrenSourceObjectId().size(), 1, -1);
 		MyEntityManager mem = new MyEntityManager();
 		mem.newModel(c);
 		System.out.println(b.toString());
@@ -48,11 +48,11 @@ public class ProductContent {
 		
 	}
 	
-	private static void buildAProduct(String sourceObjectId, Long categoryId, long version) {
+	private static void buildAProduct(String sourceObjectId, Category category, long version) {
 		
 		BasicApiRequest bar = new ItemLookupRequest(sourceObjectId, 1, 1);
 		ItemLookupResponse b = (ItemLookupResponse) bar.call();
-		b.setCategoryId(categoryId);
+		b.setCategory(category);
 		Product p = Product.createOrUpdateFromAwsApi(b, version);
 		
 	}
@@ -78,7 +78,7 @@ public class ProductContent {
 			try {
 				String productSourceObjectId = b.getItemsIdList().get(i);
 				System.out.println(productSourceObjectId);
-				buildAProduct(productSourceObjectId, c.getId(), version);
+				buildAProduct(productSourceObjectId, c, version);
 				totalItemsFetched++;
 				Thread.sleep(800);
 			} catch (Exception e) {				
@@ -172,8 +172,10 @@ public class ProductContent {
 //				ItemLookupResponse ilrb = (ItemLookupResponse) itml.call();
 //				System.out.println(ilrb.toString());
 //				ilrb.setCategoryId(1L);
-//				Product p = Product.createOrUpdateFromAwsApi(ilrb, 1);			
-				buildAProduct("B004LDG9IO", 1L, 1L);
+//				Product p = Product.createOrUpdateFromAwsApi(ilrb, 1);	
+				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+				
+				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 1L), 1L);
 				
 				break;
 			default:

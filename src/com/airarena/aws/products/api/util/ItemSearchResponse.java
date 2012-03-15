@@ -64,6 +64,49 @@ public class ItemSearchResponse extends BasicApiRespose {
 			"[LowestNewPrice:" + this.pageMaxNewPrice + "], " +
 			"[ChildList:" + itemsIdList.toString() + "]";
 		     		
+	}
+	
+	
+	@Override
+	public boolean isValidate() {
+
+		boolean success = true;
+		System.out.println("Validate Search response =====================");
+
+
+		if (this.getTotalPage() <= 0 ) {
+			System.out.println("totalPage test failed!");
+			success = false;			
+		}
+
+		if (this.getTotalItems() <= 0 ) {
+			System.out.println("totalItems test failed!");
+			success = false;			
+		}
+		if (this.getCurrentPage() <= 0 ) {
+			System.out.println("currentPage test failed!");
+			success = false;			
+		}
+		if (this.getPageMaxNewPrice() <= 0 ) {
+			System.out.println("pageMaxNewPrice test failed!");
+			success = false;			
+		}
+		
+		if (!BasicApiRespose.validateList(this.getItemsIdList())) {
+			System.out.println("ItemsIdList test failed!");
+			success = false;									
+		}
+		
+		if (!success) {
+			System.out.println("IemSearchResponse test failed!!!!!!!!!!!!!!!!!");
+		} else {
+			System.out.println("IemSearchResponse test passed!!!!!!!!!!!!!!!!!");
+		}
+		
+		return success;
+		
+
+		
 	}	
 	
 }

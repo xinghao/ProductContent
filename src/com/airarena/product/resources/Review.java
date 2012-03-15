@@ -183,6 +183,15 @@ public class Review extends BaseResource {
 			return true;
 		}
 		
+		public boolean isNull() {
+			if (this.getHelpful() == null && this.getRate() == -1 && this.submitAt == null && this.title == null && this.address == null && this.author == null) {
+				return true;
+			}
+			return false;
+			
+		}
+		
+		
 		@Override
 		public String toString() {
 			return "ReviewDetail [helpful=" + helpful + ", rate=" + rate

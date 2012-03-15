@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.airarena.product.resources.*;
+import com.airarena.products.model.Category;
 import com.airarena.products.model.Product;
 
 public class ItemLookupResponse extends BasicApiRespose {
@@ -19,7 +20,7 @@ public class ItemLookupResponse extends BasicApiRespose {
 	private String descirption;
 	private String reviewUrl;
 	private String specificationUrl;
-	private Long categoryId;
+	private Category category;	
 	private Long salesRank = 0L;	
 //	private Long priceAmount = 0L;
 //	private String currencyCode = "USD";
@@ -102,18 +103,28 @@ public class ItemLookupResponse extends BasicApiRespose {
 	}
 
 
-	public Long getCategoryId() {
-		return categoryId;
-	}
-
-
-	public void setCategoryId(Long categoryId) {
-		this.categoryId = categoryId;
-	}
+//	public Long getCategoryId() {
+//		return categoryId;
+//	}
+//
+//
+//	public void setCategoryId(Long categoryId) {
+//		this.categoryId = categoryId;
+//	}
 
 
 	public String getRawXmlContentUrl() {
 		return rawXmlContentUrl;
+	}
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 
@@ -276,6 +287,119 @@ public class ItemLookupResponse extends BasicApiRespose {
 	}
 
 
+	@Override
+	public boolean isValidate() {
+		boolean success = true;
+		System.out.println("Validate Lookup response =====================");
 
+		if (!BasicApiRespose.validateString(this.getSourceObjectId())) {
+			System.out.println("source object test failed!");
+			success = false;			
+		}
+		
+		if (!BasicApiRespose.validateString(this.getRawXmlContentUrl())) {
+			System.out.println("rawXmlContentUrl test failed!");
+			success = false;			
+		}
+
+		if (!BasicApiRespose.validateString(this.getReviewUrl())) {
+			System.out.println("reviewUrl test failed!");
+			success = false;			
+		}
+		
+		if (!BasicApiRespose.validateString(this.getSpecificationUrl())) {
+			System.out.println("specificationUrl test failed!");
+			success = false;			
+		}
+
+		if (!BasicApiRespose.validateString(this.getRawHtmlContentUrl())) {
+			System.out.println("rawHtmlContentUrl test failed!");
+			success = false;			
+		}
+
+		if (!BasicApiRespose.validateString(this.getDescirption())) {
+			System.out.println("descirption test failed!");
+			success = false;			
+		}
+		
+//		if (this.getCategory(). <= 0) {
+//			System.out.println("categoryId test failed!");
+//			success = false;			
+//		}
+		
+		if (this.getSalesRank() <= 0 ) {
+			System.out.println("salesRank test failed!");
+			success = false;						
+		}
+		
+		if (!BasicApiRespose.validateMap(this.getImages())) {
+			System.out.println("images test failed!");
+			success = false;									
+		}
+
+		if (!BasicApiRespose.validateMap(this.getItemAttributes())) {
+			System.out.println("itemAttributes test failed!");
+			success = false;									
+		}
+
+		if (!BasicApiRespose.validateMap(this.getPriceList())) {
+			System.out.println("priceList test failed!");
+			success = false;									
+		}
+
+		if (!BasicApiRespose.validateMap(this.getTechnicalDetailList())) {
+			System.out.println("technicalDetailList test failed!");
+			success = false;									
+		}
+		
+		if (!this.getReview().isValidate()) {
+			System.out.println("review test failed!");
+			System.out.println(this.getReview().toString());
+			success = false;												
+		}
+
+		if (!success) {
+			System.out.println("IemLookupResponse test failed!!!!!!!!!!!!!!!!!");
+		} else {
+			System.out.println("IemLookupResponse test passed!!!!!!!!!!!!!!!!!");
+		}
+		
+		return success;
+	}
+
+
+//	public boolean isValidate() {
+//		
+//		
+//		
+//	private Long priceAmount = 0L;
+//	private String currencyCode = "USD";
+	
+
+	//		
+//
+//		BasicApiRequest itml = new ItemLookupRequest(sourceObjectId, 1, 1);
+//		ItemLookupResponse ilrb = (ItemLookupResponse) itml.call();
+//		System.out.println(ilrb);
+//		
+//		if (ilrb.getTechnicalDetailList().isEmpty()) {
+//			System.out.println("Technical Detail test failed!");
+//			success = false;
+//		}
+//		//System.out.println(ilrb.getReview());
+//		if (ilrb.getReview() == null || !ilrb.getReview().isValidate()) {
+//			System.out.println("Review test failed!");
+//			success = false;				
+//		}
+//		
+//		if (ilrb.getImages() == null || ilrb.getImages().isEmpty()) {
+//			System.out.println("Image test failed!");
+//			success = false;								
+//		}
+//			
+//
+//		return success;
+//
+//	}
 
 }

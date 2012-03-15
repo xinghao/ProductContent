@@ -2,7 +2,9 @@ package com.airarena.products.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NoResultException;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +33,9 @@ public class Category extends BaseModel{
     private Long parent_id;
     private int subcategories_count;
     private ScraperVersion scraper_version;
+    private int is_valid = 1;
+    
+    private Set<Product> products;
 //    private int version = 1;
 //    
 //    private Date created_at;
@@ -39,7 +45,7 @@ public class Category extends BaseModel{
 		// this form used by Hibernate
 	}
 
-	public Category(String name, String source_object_id, Long provider_id, Long parent_id, int subcategories_count, long version) {
+	public Category(String name, String source_object_id, Long provider_id, Long parent_id, int subcategories_count, int is_valid, long version) {
 		// for application use, to create new events
 		this.name = name;
 		this.permalink = name;
@@ -52,6 +58,7 @@ public class Category extends BaseModel{
 		this.parent_id = parent_id;
 		this.subcategories_count = subcategories_count;
 		this.scraper_version = new ScraperVersion(version);
+		this.is_valid = is_valid;
 //		if (version > 1)
 //			this.version = version;
 //		this.updated_at = this.created_at = new Date();
@@ -67,6 +74,14 @@ public class Category extends BaseModel{
     private void setId(Long id) {
 		this.id = id;
     }
+    
+	public int getIs_valid() {
+		return is_valid;
+	}
+
+	public void setIs_valid(int is_valid) {
+		this.is_valid = is_valid;
+	}
 
 	public String getName() {
 		return name;
@@ -148,6 +163,15 @@ public class Category extends BaseModel{
 //		this.updated_at = updated_at;
 //	}
 	
+	@OneToMany(mappedBy="category",orphanRemoval=true, cascade=CascadeType.ALL)	
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
 	@Embedded
 	public ScraperVersion getScraper_version() {
 		return scraper_version;

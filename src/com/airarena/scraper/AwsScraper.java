@@ -81,12 +81,14 @@ public class AwsScraper extends Scraper {
 		for(Element reviewTag : reviewsTags) {
 			hasReview = true;
 			ReviewDetail rd = review.initReviewDetail(); 
-			rd.setReviewHtml(reviewTag.ownText());
-			review.getRds().add(rd);
-			if (reviewTag.children().size() > 3) {
-				rd.setHelpful(reviewTag.child(0).html()); //helpful
+			if (reviewTag.ownText() != null && !reviewTag.ownText().trim().isEmpty()) {
+				rd.setReviewHtml(reviewTag.ownText());			
+			}
+			Elements conts = reviewTag.select("div[style=margin-bottom:0.5em;]");
+			if (conts.size() >= 3) {
+				rd.setHelpful(conts.get(0).html()); //helpful
 				
-				Elements rateAndTitle = reviewTag.child(1).children();
+				Elements rateAndTitle = conts.get(1).children();
 				if (rateAndTitle.size() >= 2) {
 					Elements t = rateAndTitle.get(1).children();
 					if (t.size() >= 2) {
@@ -112,7 +114,7 @@ public class AwsScraper extends Scraper {
 					
 				}
 				
-				Elements nameAndAdress = reviewTag.child(2).children();
+				Elements nameAndAdress = conts.get(2).children();
 				if (nameAndAdress.size() > 0) {
 					Elements namAndAdressDivs = nameAndAdress.get(0).children();
 					if (namAndAdressDivs.size() > 1) {
@@ -135,7 +137,8 @@ public class AwsScraper extends Scraper {
 				}
 				//System.out.println(review.child(0).html());
 			}
-			
+			// get ride of all the rubbish from websites
+			if (!rd.isNull()) review.getRds().add(rd);
 		}		
 		if (hasReview) {
 			return review;
@@ -170,5 +173,6 @@ public class AwsScraper extends Scraper {
 		return retHash;
 		
 	}
+	
 	
 }

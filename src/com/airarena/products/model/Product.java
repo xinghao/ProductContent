@@ -2,6 +2,7 @@ package com.airarena.products.model;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.Table;
@@ -40,7 +43,7 @@ public class Product extends BaseModel {
     private Long id;
     
 	private String source_object_id;	
-	private Long category_id;
+	private Category category;
 	private String raw_xml_content_url;
 	private String raw_html_content_url;
 	private String descirption;
@@ -66,10 +69,27 @@ public class Product extends BaseModel {
     
     private Set<ProductPrice> pcSet;
     private Set<ProductReview> prSet;
+    private Set<ProductSpecification> psSet;
 	
 	public Product() {
 	}
 
+	
+	private void setSpecifications(HashMap<String, String> ss) {
+		if (ss == null || ss.isEmpty()) return;
+		
+		Set<ProductSpecification> newPsSet = this.getPsSet();
+		if (newPsSet == null) {
+			newPsSet = new HashSet<ProductSpecification>(); 
+		} else if (!newPsSet.isEmpty()) {
+			newPsSet.clear();
+		}
+			
+		for(String key : ss.keySet()) {
+			newPsSet.add(new ProductSpecification(key, ss.get(key), 1, this));			
+		}
+		this.setPsSet(newPsSet);        		
+	}
 	
 	private void setFromReview(Review review) {
 		if (review== null) return;
@@ -96,12 +116,13 @@ public class Product extends BaseModel {
 		}
 	}
 	
-	public Product(String source_bject_id, Long category_id, String rawXmlContentUrl,
+	public Product(String source_bject_id, Category category, String rawXmlContentUrl,
 			String rawHtmlContentUrl, String descirption, String reviewUrl,
-			String specificationUrl, Long salesRank,  Review review, int is_valid, long version) {
+			String specificationUrl, Long salesRank,  Review review, HashMap<String, String> specifications, int is_valid, long version) {
 		super();
 		this.source_object_id = source_bject_id;
-		this.category_id = category_id;
+		//this.category_id = category_id;
+		this.category = category;
 		this.raw_xml_content_url = rawXmlContentUrl;
 		this.raw_html_content_url = rawHtmlContentUrl;
 		this.descirption = descirption;
@@ -112,7 +133,7 @@ public class Product extends BaseModel {
 		this.scraper_version = new ScraperVersion(version);
 
 		setFromReview(review);
-
+		setSpecifications(specifications);
 //		this.version = version;
 //		this.currency_code = currencyCode;
 //		this.price_amount = priceAmount;
@@ -147,16 +168,7 @@ public class Product extends BaseModel {
 	}
 
 
-	@org.hibernate.annotations.Index(name = "myProductCategoryIndex")
-	public Long getCategory_id() {
-		return category_id;
-	}
 
-
-
-	public void setCategory_id(Long category_id) {
-		this.category_id = category_id;
-	}
 
 
 
@@ -166,6 +178,17 @@ public class Product extends BaseModel {
 		return descirption;
 	}
 
+	@ManyToOne
+    @JoinColumn(name="category_id")		
+	@org.hibernate.annotations.Index(name = "myProductCategoryIndex")
+	public Category getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 
 	public void setDescirption(String descirption) {
@@ -284,7 +307,17 @@ public class Product extends BaseModel {
 //	}
 
 
-	
+	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)
+	public Set<ProductSpecification> getPsSet() {
+		return psSet;
+	}
+
+
+	public void setPsSet(Set<ProductSpecification> psSet) {
+		this.psSet = psSet;
+	}
+
+
 	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)	
 	public Set<ProductPrice> getPcSet() {
 		return pcSet;
@@ -468,7 +501,8 @@ public class Product extends BaseModel {
 			//p.getPcSet().removeAll(p.getPcSet());
 			
 			
-			p.category_id = ilr.getCategoryId();
+			//p.category_id = ilr.getCategoryId();
+			p.setCategory(ilr.getCategory());
 			p.raw_xml_content_url = ilr.getRawXmlContentUrl();
 			p.raw_html_content_url = ilr.getRawHtmlContentUrl();
 			p.descirption = ilr.getDescirption();
@@ -478,15 +512,16 @@ public class Product extends BaseModel {
 			p.is_valid = 1;
 			p.scraper_version = new ScraperVersion(version);
 			p.setFromReview(ilr.getReview());
+			p.setSpecifications(ilr.getTechnicalDetailList());
 //			p.version = version;
 //			p.updated_at = new Date();	
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		} else if (!overrider && p.getScraper_version().getScraper_version() == 1L){
 			return p;
 		} else {		
-			p = new Product(ilr.getSourceObjectId(), ilr.getCategoryId(), ilr.getRawXmlContentUrl(),
+			p = new Product(ilr.getSourceObjectId(), ilr.getCategory(), ilr.getRawXmlContentUrl(),
 					ilr.getRawHtmlContentUrl(), ilr.getDescirption(), ilr.getReviewUrl(),
-					ilr.getSpecificationUrl(), ilr.getSalesRank(), ilr.getReview(), 1, version);
+					ilr.getSpecificationUrl(), ilr.getSalesRank(), ilr.getReview(), ilr.getTechnicalDetailList(), 1, version);
 					
 		}
 
@@ -600,4 +635,6 @@ public class Product extends BaseModel {
 
 		
 	}
+	
+	
 }
