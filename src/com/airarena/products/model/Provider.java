@@ -24,8 +24,8 @@ public class Provider extends BaseModel{
 //    private Long parent_id;
 //    private int is_leaf;
     
-    private Date created_at;
-    private Date updated_at;
+//    private Date created_at;
+//    private Date updated_at;
 
 	public Provider() {
 		// this form used by Hibernate
@@ -36,7 +36,7 @@ public class Provider extends BaseModel{
 		this.name = name;
 		// [TODO] figure out how to generate permalink.
 		this.permalink = name; 
-		this.updated_at = this.created_at = new Date();
+//		this.updated_at = this.created_at = new Date();
 	}
 
 	@Id
@@ -67,25 +67,25 @@ public class Provider extends BaseModel{
 	}
 
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at")
-	public Date getCreated_at() {
-		return created_at;
-	}
-
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at")
-	public Date getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
-	}
-	
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name = "created_at")
+//	public Date getCreated_at() {
+//		return created_at;
+//	}
+//
+//	public void setCreated_at(Date created_at) {
+//		this.created_at = created_at;
+//	}
+//
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name = "updated_at")
+//	public Date getUpdated_at() {
+//		return updated_at;
+//	}
+//
+//	public void setUpdated_at(Date updated_at) {
+//		this.updated_at = updated_at;
+//	}
+//	
 
 }

@@ -30,9 +30,9 @@ public class ProductAttribute extends BaseModel {
 	private Long product_attribute_meta_key_id;
 	private String value;
     private int is_valid = 1;
-    private int version = 1;    
-    private Date created_at;
-    private Date updated_at;
+//    private int version = 1;    
+//    private Date created_at;
+//    private Date updated_at;
 	
     
 	public ProductAttribute() {
@@ -51,8 +51,8 @@ public class ProductAttribute extends BaseModel {
 		this.product_attribute_meta_key_id = product_attribute_meta_key_id;
 		this.value = value;
 		this.is_valid = is_valid;
-		this.version = version;
-		this.updated_at = this.created_at = new Date();		
+//		this.version = version;
+//		this.updated_at = this.created_at = new Date();		
 	}
 
 
@@ -121,7 +121,7 @@ public class ProductAttribute extends BaseModel {
 	}
 
 
-
+/*
 	public int getVersion() {
 		return version;
 	}
@@ -154,5 +154,5 @@ public class ProductAttribute extends BaseModel {
 		this.updated_at = updated_at;
 	}
 	
-	
+	*/
 }

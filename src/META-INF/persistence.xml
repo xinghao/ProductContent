@@ -46,7 +46,7 @@
             <property name="javax.persistence.jdbc.password" value="wanU2e8a" />
 			-->
 			
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" /> 
             <!-- <property name="hibernate.hbm2ddl.auto" value="create" />  -->
             

@@ -6,6 +6,31 @@ public class InitDB {
 	
 	// should only be run when we create database
 	public static void insertInitData() {
+		
+		if (ProductAttributeMetaKey.loadKeys().size() == 0 ) {
+			insertProductMetaKeys();
+			System.out.println("MetaKey loading/Provider is successful!");
+		} else {
+			System.out.println("MetaKey/Provider already been loaded?");
+		}
+		if (ProductCondition.loadKeys().size() == 0) {
+			insertProductConditions();
+			System.out.println("Price Condition loading is successful!");
+		} else {
+			System.out.println("Price conditions already been loaded?");
+		}
+	}
+
+	private static void insertProductConditions() {
+		// TODO Auto-generated method stub
+		MyEntityManager s = new MyEntityManager();
+		s.newModel(new ProductCondition("New"));
+		s.newModel(new ProductCondition("Used"));
+		s.newModel(new ProductCondition("Collectible"));
+		s.newModel(new ProductCondition("Refurbished"));
+	}
+
+	private static void insertProductMetaKeys(){
 		MyEntityManager s = new MyEntityManager();
 		s.newModel(new Provider("aws"));
 		s.newModel(new ProductAttributeMetaKey("Artist".toLowerCase(), null));
@@ -76,7 +101,7 @@ public class InitDB {
 		s.newModel(new ProductAttributeMetaKey("Title".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("TrackSequence".toLowerCase(), null));
 		s.newModel(new ProductAttributeMetaKey("UPC".toLowerCase(), null));
-		s.newModel(new ProductAttributeMetaKey("Warranty".toLowerCase(), null));		
+		s.newModel(new ProductAttributeMetaKey("Warranty".toLowerCase(), null));				
 	}
 
 }

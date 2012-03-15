@@ -29,8 +29,8 @@ public class ProductAttributeMetaKey extends BaseModel {
     private String description;    
     private Long provider_id = 1L; //default it will be aws category.
     private int is_valid = 1;
-    private Date created_at;
-    private Date updated_at;	
+//    private Date created_at;
+//    private Date updated_at;	
     
     private static HashMap<String, ProductAttributeMetaKey> keys = null;
 
@@ -41,10 +41,10 @@ public class ProductAttributeMetaKey extends BaseModel {
 	public ProductAttributeMetaKey(String name, String description) {
 		this.name = name;
 		this.description = description;
-		this.updated_at = this.created_at = new Date();		
+//		this.updated_at = this.created_at = new Date();		
 	}	
 
-	private static void loadKeys() {
+	public static HashMap<String, ProductAttributeMetaKey> loadKeys() {
 		ProductAttributeMetaKey.keys = new HashMap<String, ProductAttributeMetaKey>();
 		
 		EntityManager em = MyEntityManagerFactory.getInstance();
@@ -52,7 +52,7 @@ public class ProductAttributeMetaKey extends BaseModel {
 		for (ProductAttributeMetaKey metaKey : metaKeys) {
 			keys.put(metaKey.getName().toLowerCase(), metaKey);
 		}
-		
+		return keys;
 	}
 	
 	public static ProductAttributeMetaKey getProductAttributeByName(String name) {
@@ -107,6 +107,7 @@ public class ProductAttributeMetaKey extends BaseModel {
 		this.is_valid = is_valid;
 	}
 
+	/*
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at")
 	public Date getCreated_at() {
@@ -126,5 +127,5 @@ public class ProductAttributeMetaKey extends BaseModel {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-		
+		*/
 }

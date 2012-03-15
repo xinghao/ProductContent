@@ -34,9 +34,9 @@ public class ProductImage extends BaseModel {
 	private int weight;
 	private int height;
     private int is_valid = 1;
-    private int version = 1;    
-    private Date created_at;
-    private Date updated_at;
+//    private int version = 1;    
+//    private Date created_at;
+//    private Date updated_at;
 	
     public ProductImage() {
     	
@@ -49,8 +49,8 @@ public class ProductImage extends BaseModel {
     	this.weight = image.getWeight();
     	this.height = image.getHeight();
     	this.is_valid = is_valid;
-    	this.version = version;
-		this.updated_at = this.created_at = new Date();		    	
+//    	this.version = version;
+//		this.updated_at = this.created_at = new Date();		    	
     }
     
 	@Id
@@ -102,6 +102,8 @@ public class ProductImage extends BaseModel {
 	public void setIs_valid(int is_valid) {
 		this.is_valid = is_valid;
 	}
+	
+	/*
 	public int getVersion() {
 		return version;
 	}
@@ -128,7 +130,7 @@ public class ProductImage extends BaseModel {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-
+*/
 	
     
 }

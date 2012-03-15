@@ -26,12 +26,16 @@ public abstract class BasicApiRequest {
 	public static final String AWS_RESPONSE_GROUP_REVIEWS = "Reviews";
 	public static final String AWS_RESPONSE_GROUP_SALESRANK = "SalesRank";
 	public static final String AWS_CONTENT_SPECIFICATION = "Technical Details";
+	public static final String AWS_CONTENT_ALL_REVIEW = "All Customer Reviews";
 	public static final String AWS_CONTENT_DESCRIPTION_SOURCE = "Product Description";
 	
 	public static final String AWS_SORT_US_ELECTRONIC_DESC = "-price";
 	public static final String AWS_SORT_US_ELECTRONIC_ASC = "price";
 	
 	public static final String AWS_VALUE_SEPARATER = "|||||";
+	public static final String AWS_PRODUCT_IMAGE_PRIMARY = "primary";
+	public static final String AWS_PRODUCT_IMAGE_VARIANT = "variant";
+	
 	
 	public static final String AWS_RESPONSE_GROUP_ITEMLOOKUP = AWS_RESPONSE_GROUP_EDITORIALREVIEW +
 	"," + AWS_RESPONSE_GROUP_IMAGES + 
@@ -73,7 +77,7 @@ public abstract class BasicApiRequest {
         
         
         requestUrl = helper.sign(params);
-        //System.out.println("Signed Request is \"" + requestUrl + "\"");
+        System.out.println("Signed Request is \"" + requestUrl + "\"");
         this.requestUrl = requestUrl;
         
         try {

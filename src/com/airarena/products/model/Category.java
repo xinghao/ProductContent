@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -28,16 +29,17 @@ public class Category extends BaseModel{
     private Long provider_id = 1L; //default it will be aws category.
     private Long parent_id;
     private int subcategories_count;
-    private int version = 1;
-    
-    private Date created_at;
-    private Date updated_at;
+    private ScraperVersion scraper_version;
+//    private int version = 1;
+//    
+//    private Date created_at;
+//    private Date updated_at;
 
 	public Category() {
 		// this form used by Hibernate
 	}
 
-	public Category(String name, String source_object_id, Long provider_id, Long parent_id, int subcategories_count, int version) {
+	public Category(String name, String source_object_id, Long provider_id, Long parent_id, int subcategories_count, long version) {
 		// for application use, to create new events
 		this.name = name;
 		this.permalink = name;
@@ -49,9 +51,10 @@ public class Category extends BaseModel{
 		
 		this.parent_id = parent_id;
 		this.subcategories_count = subcategories_count;
-		if (version > 1)
-			this.version = version;
-		this.updated_at = this.created_at = new Date();
+		this.scraper_version = new ScraperVersion(version);
+//		if (version > 1)
+//			this.version = version;
+//		this.updated_at = this.created_at = new Date();
 	}
 
 	@Id
@@ -114,35 +117,46 @@ public class Category extends BaseModel{
 	public void setSubcategories_count(int subcategories_count) {
 		this.subcategories_count = subcategories_count;
 	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at")
-	public Date getCreated_at() {
-		return created_at;
-	}
-
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at")
-	public Date getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setUpdated_at(Date updated_at) {
-		this.updated_at = updated_at;
-	}
 	
+	
+
+//	public int getVersion() {
+//		return version;
+//	}
+//
+//	public void setVersion(int version) {
+//		this.version = version;
+//	}
+//
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name = "created_at")
+//	public Date getCreated_at() {
+//		return created_at;
+//	}
+//
+//	public void setCreated_at(Date created_at) {
+//		this.created_at = created_at;
+//	}
+//
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name = "updated_at")
+//	public Date getUpdated_at() {
+//		return updated_at;
+//	}
+//
+//	public void setUpdated_at(Date updated_at) {
+//		this.updated_at = updated_at;
+//	}
+	
+	@Embedded
+	public ScraperVersion getScraper_version() {
+		return scraper_version;
+	}
+
+	public void setScraper_version(ScraperVersion scraper_version) {
+		this.scraper_version = scraper_version;
+	}
+
 	public static List<Category> getLeafCatgories(Long categoryId) {
 		try {
 			EntityManager entityManager = MyEntityManagerFactory.getInstance();

@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="/Users/xinghao/Documents/java/ProductContent/lib/antlr-2.7.7.jar"/>
 	<classpathentry kind="lib" path="/Users/xinghao/Documents/java/ProductContent/lib/log4j-1.2.15.jar"/>
 	<classpathentry kind="lib" path="/Users/xinghao/Documents/java/ProductContent/lib/hibernate-entitymanager-4.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/xinghao/Documents/java/ProductContent/lib/jsoup-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

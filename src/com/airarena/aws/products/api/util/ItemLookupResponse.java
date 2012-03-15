@@ -21,12 +21,14 @@ public class ItemLookupResponse extends BasicApiRespose {
 	private String specificationUrl;
 	private Long categoryId;
 	private Long salesRank = 0L;	
-	private Long priceAmount = 0L;
-	private String currencyCode = "USD";
+//	private Long priceAmount = 0L;
+//	private String currencyCode = "USD";
 	
 	private HashMap<String, Image> images = new HashMap<String, Image>();
 	private HashMap<Long, String> itemAttributes = new HashMap<Long, String>();
-	
+	private HashMap<String, Price> priceList= new HashMap<String, Price>();
+	private HashMap<String, String> technicalDetailList= new HashMap<String, String>();
+	private Review review;
 	
 	public String getSourceObjectId() {
 		return sourceObjectId;
@@ -37,6 +39,7 @@ public class ItemLookupResponse extends BasicApiRespose {
 		this.sourceObjectId = sourceObjectId;
 	}
 
+	
 	
 
 //	public String getName() {
@@ -77,6 +80,26 @@ public class ItemLookupResponse extends BasicApiRespose {
 //	public void setProductTypeName(String productTypeName) {
 //		this.productTypeName = productTypeName;
 //	}
+
+
+	public Review getReview() {
+		return review;
+	}
+
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
+
+	public HashMap<String, String> getTechnicalDetailList() {
+		return technicalDetailList;
+	}
+
+
+	public void setTechnicalDetailList(HashMap<String, String> technicalDetailList) {
+		this.technicalDetailList = technicalDetailList;
+	}
 
 
 	public Long getCategoryId() {
@@ -169,23 +192,34 @@ public class ItemLookupResponse extends BasicApiRespose {
 	}
 
 
-	public Long getPriceAmount() {
-		return priceAmount;
+//	public Long getPriceAmount() {
+//		return priceAmount;
+//	}
+//
+//
+//	public void setPriceAmount(Long priceAmount) {
+//		this.priceAmount = priceAmount;
+//	}
+//
+//
+//	public String getCurrencyCode() {
+//		return currencyCode;
+//	}
+//
+//
+//	public void setCurrencyCode(String currencyCode) {
+//		this.currencyCode = currencyCode;
+//	}
+
+	
+
+	public HashMap<String, Price> getPriceList() {
+		return priceList;
 	}
 
 
-	public void setPriceAmount(Long priceAmount) {
-		this.priceAmount = priceAmount;
-	}
-
-
-	public String getCurrencyCode() {
-		return currencyCode;
-	}
-
-
-	public void setCurrencyCode(String currencyCode) {
-		this.currencyCode = currencyCode;
+	public void setPriceList(HashMap<String, Price> priceList) {
+		this.priceList = priceList;
 	}
 
 
@@ -207,14 +241,35 @@ public class ItemLookupResponse extends BasicApiRespose {
         	as.append(j.next());
         }
         
+        StringBuilder pls = new StringBuilder();
+        
+		Set plss = this.priceList.entrySet();
+        Iterator k = plss.iterator();
+        while (k.hasNext()) {
+        	pls.append(k.next());
+        }
+
+        StringBuilder tdList = new StringBuilder();
+        
+		Set tdListSet = this.technicalDetailList.entrySet();
+        Iterator o = tdListSet.iterator();
+        while (o.hasNext()) {
+        	tdList.append(o.next());
+        }
+        
+        String reviewStr = "";
+        if (this.review != null) reviewStr = this.review.toString();
         
 		return "ItemLookupResponse [sourceObjectId=" + sourceObjectId
 				+ ", rawXmlContentUrl=" + rawXmlContentUrl
-				+ ", rawHtmlContentUrl=" + rawHtmlContentUrl + ", descirption="
+				+ ", rawHtmlContentUrl=" + rawHtmlContentUrl + ", technical_details="
+				+ tdList.toString() + ", review="
+				+ reviewStr + ", descirption="
 				+ descirption + ", SalesRank=" 
-				+ this.salesRank + ", reviewUrl=" + reviewUrl
+				+ this.salesRank + ", priceList="
+				+ pls.toString() + ", reviewUrl=" + reviewUrl				
 				+ ", specificationUrl=" + specificationUrl
-				+ ", pricae=" + this.currencyCode + " " + this.priceAmount + ", images="
+				+ ",  images="
 //				+ itms.toString() 
 				+ ", attributs=" +as.toString()  
 				+ "]";

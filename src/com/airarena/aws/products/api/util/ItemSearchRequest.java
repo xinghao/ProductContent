@@ -37,6 +37,7 @@ public class ItemSearchRequest extends BasicApiRequest {
         params.put("ItemPage", String.valueOf(this.page));
         params.put("SearchIndex", this.searchIndex);
         params.put("Sort", this.sort);
+        //params.put("Condition", "New");
         if(minimumPrice != null && minimumPrice > 0) {
         	params.put("MinimumPrice", String.valueOf(this.minimumPrice));
         }        
@@ -78,9 +79,72 @@ public class ItemSearchRequest extends BasicApiRequest {
 			this.tsr.getItemsIdList().add(itemNode.getTextContent());
 		}
 		
+
+//		long lowestMaxPagePrice = Long.MAX_VALUE; 
+//		expr = xpath.compile("//Items/Item/OfferSummary");
+//		NodeList pricesNodes = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+//		Node lastPriceNode= pricesNodes.item(pricesNodes.getLength() - 1);
+//		for(int i = 0; i < lastPriceNode.getChildNodes().getLength(); ++i) {
+//			Node node1 = lastPriceNode.getChildNodes().item(i);
+//			if (node1.getNodeName().startsWith("Lowest")) {
+//				if (lowestMaxPagePrice > Long.valueOf(node1.getFirstChild().getTextContent())) {
+//					lowestMaxPagePrice = Long.valueOf(node1.getFirstChild().getTextContent());
+//				}
+//			}
+//		}
+//		if (lowestMaxPagePrice == Long.MAX_VALUE) {
+//			lowestMaxPagePrice = -1L;
+//		}
+
+		
+		// Fix Amount = "Too low to display" bug. that means last offersummary element does not have price info.
+
+		long lowestNewPrice, lowestUsedPrice, lowestCollectiblePrice, lowestRefurbished, lowestMaxPagePrice;
+		lowestNewPrice = lowestUsedPrice = lowestCollectiblePrice = lowestRefurbished = lowestMaxPagePrice = Long.MAX_VALUE;
+		
 		expr = xpath.compile("//Items/Item/OfferSummary/LowestNewPrice/Amount");
 		NodeList pricesNodes = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
-		this.tsr.setPageLowerNewPrice(Long.valueOf(pricesNodes.item(pricesNodes.getLength() - 1).getTextContent()));
+		for(int i = 0; i < pricesNodes.getLength(); ++i) {
+			if (i == 0) lowestNewPrice = 0L;
+			Node node1 = pricesNodes.item(i); 
+			if (lowestNewPrice < Long.valueOf(node1.getTextContent())) {
+				lowestNewPrice = Long.valueOf(node1.getTextContent());
+			}			
+		}
+		
+		expr = xpath.compile("//Items/Item/OfferSummary/LowestUsedPrice/Amount");
+		pricesNodes = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+		for(int i = 0; i < pricesNodes.getLength(); ++i) {
+			if (i == 0) lowestUsedPrice = 0L;
+			Node node1 = pricesNodes.item(i); 
+			if (lowestUsedPrice < Long.valueOf(node1.getTextContent())) {
+				lowestUsedPrice = Long.valueOf(node1.getTextContent());
+			}			
+		}	
+		
+		expr = xpath.compile("//Items/Item/OfferSummary/LowestCollectiblePrice/Amount");
+		pricesNodes = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+		for(int i = 0; i < pricesNodes.getLength(); ++i) {
+			if (i == 0) lowestCollectiblePrice = 0L;
+			Node node1 = pricesNodes.item(i); 
+			if (lowestCollectiblePrice < Long.valueOf(node1.getTextContent())) {
+				lowestCollectiblePrice = Long.valueOf(node1.getTextContent());
+			}			
+		}	
+		
+		expr = xpath.compile("//Items/Item/OfferSummary/LowestRefurbishedPrice/Amount");
+		pricesNodes = (NodeList)expr.evaluate(doc, XPathConstants.NODESET);
+		for(int i = 0; i < pricesNodes.getLength(); ++i) {
+			if (i == 0) lowestRefurbished = 0L;
+			Node node1 = pricesNodes.item(i); 
+			if (lowestRefurbished < Long.valueOf(node1.getTextContent())) {
+				lowestRefurbished = Long.valueOf(node1.getTextContent());
+			}			
+		}			
+		
+		lowestMaxPagePrice = Math.min(Math.min(Math.min(lowestNewPrice, lowestUsedPrice), lowestCollectiblePrice), lowestRefurbished);
+		
+		this.tsr.setPageMaxNewPrice(lowestMaxPagePrice);
 		
 	}
 

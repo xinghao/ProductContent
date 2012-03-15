@@ -6,6 +6,8 @@ public class Image extends BaseResource {
 	public static final String CATEGORY_SAMLL = "small";
 	public static final String CATEGORY_MEDIUM = "medium";
 	public static final String CATEGORY_LARGE = "large";
+	public static final String CATEGORY_SWATCH = "SwatchImage";
+	
 	
 	public Image() {
 		

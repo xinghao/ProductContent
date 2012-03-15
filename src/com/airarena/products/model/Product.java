@@ -2,11 +2,14 @@ package com.airarena.products.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
@@ -16,14 +19,19 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
+
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
 
+
 import com.airarena.aws.products.api.util.ItemLookupResponse;
 import com.airarena.hibernate.util.MyEntityManagerFactory;
 import com.airarena.product.resources.Image;
+import com.airarena.product.resources.Review;
+import com.airarena.product.resources.Review.ReviewDetail;
 
 @Entity
 @Table( name = "products" )
@@ -40,21 +48,57 @@ public class Product extends BaseModel {
 	private String specification_url;
 	private Long sales_rank;
     private int is_valid = 1;
-    private int version = 1;    
-    private Date created_at;
-    private Date updated_at;	
-    private String currency_code;
-    private Long price_amount;
-
+    
+	private int totalReviewsAmount = 0;
+	private int fiveStarAmount = 0;
+	private int fourStarAmount = 0;
+	private int threeStarAmount = 0;
+	private int twoStarAmount = 0;
+	private int oneStarAmount = 0;
+	private float averageRate;
+    
+//    private int version = 1;    
+//    private Date created_at;
+//    private Date updated_at;	
+//    private String currency_code;
+//    private Long price_amount;
+    private ScraperVersion scraper_version;
+    
+    private Set<ProductPrice> pcSet;
+    private Set<ProductReview> prSet;
 	
 	public Product() {
 	}
 
 	
+	private void setFromReview(Review review) {
+		if (review== null) return;
+		this.setTotalReviewsAmount(review.getTotalReviewsAmount());
+		this.setFiveStarAmount(review.getFiveStarAmount());
+		this.setFourStarAmount(review.getFourStarAmount());
+		this.setThreeStarAmount(review.getThreeStarAmount());
+		this.setTwoStarAmount(review.getTwoStarAmount());
+		this.setOneStarAmount(review.getOneStarAmount());
+		this.setAverageRate(review.getAverageRate());
+		
+		// overrider or new review entries for product review table
+		if (!review.getRds().isEmpty()) {
+			Set<ProductReview> newPrSet = this.getPrSet();
+			if (newPrSet == null) {
+				newPrSet = new HashSet<ProductReview>();			
+			} else if (newPrSet.size() > 0) {
+				newPrSet.clear();			
+			}		
+			for (ReviewDetail rd : review.getRds()) {
+				newPrSet.add(rd.toProductReview(this));
+			}
+			this.setPrSet(newPrSet);
+		}
+	}
 	
 	public Product(String source_bject_id, Long category_id, String rawXmlContentUrl,
 			String rawHtmlContentUrl, String descirption, String reviewUrl,
-			String specificationUrl, Long salesRank, String currencyCode, Long priceAmount, int is_valid, int version) {
+			String specificationUrl, Long salesRank,  Review review, int is_valid, long version) {
 		super();
 		this.source_object_id = source_bject_id;
 		this.category_id = category_id;
@@ -65,10 +109,14 @@ public class Product extends BaseModel {
 		this.specification_url = specificationUrl;
 		this.sales_rank = salesRank;
 		this.is_valid = is_valid;
-		this.version = version;
-		this.currency_code = currencyCode;
-		this.price_amount = priceAmount;
-		this.updated_at = this.created_at = new Date();
+		this.scraper_version = new ScraperVersion(version);
+
+		setFromReview(review);
+
+//		this.version = version;
+//		this.currency_code = currencyCode;
+//		this.price_amount = priceAmount;
+//		this.updated_at = this.created_at = new Date();
 	}
 
 
@@ -138,15 +186,15 @@ public class Product extends BaseModel {
 
 
 
-	public int getVersion() {
-		return version;
-	}
-
-
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
+//	public int getVersion() {
+//		return version;
+//	}
+//
+//
+//
+//	public void setVersion(int version) {
+//		this.version = version;
+//	}
 	
 	
 
@@ -213,30 +261,148 @@ public class Product extends BaseModel {
 
 
 
-	public String getCurrency_code() {
-		return currency_code;
+//	public String getCurrency_code() {
+//		return currency_code;
+//	}
+//
+//
+//
+//	public void setCurrency_code(String currency_code) {
+//		this.currency_code = currency_code;
+//	}
+//
+//
+//
+//	public Long getPrice_amount() {
+//		return price_amount;
+//	}
+//
+//
+//
+//	public void setPrice_amount(Long price_amount) {
+//		this.price_amount = price_amount;
+//	}
+
+
+	
+	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)	
+	public Set<ProductPrice> getPcSet() {
+		return pcSet;
 	}
 
 
 
-	public void setCurrency_code(String currency_code) {
-		this.currency_code = currency_code;
+	public void setPcSet(Set<ProductPrice> pcSet) {
+		this.pcSet = pcSet;
+	}
+	
+	
+	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)	
+	public Set<ProductReview> getPrSet() {
+		return prSet;
+	}
+
+
+	public void setPrSet(Set<ProductReview> prSet) {
+		this.prSet = prSet;
+	}
+
+
+	@Embedded
+	public ScraperVersion getScraper_version() {
+		return scraper_version;
+	}
+
+	public void setScraper_version(ScraperVersion scraper_version) {
+		this.scraper_version = scraper_version;
+	}	
+
+	
+	public int getTotalReviewsAmount() {
+		return totalReviewsAmount;
 	}
 
 
 
-	public Long getPrice_amount() {
-		return price_amount;
+	public void setTotalReviewsAmount(int totalReviewsAmount) {
+		this.totalReviewsAmount = totalReviewsAmount;
 	}
 
 
 
-	public void setPrice_amount(Long price_amount) {
-		this.price_amount = price_amount;
+	public int getFiveStarAmount() {
+		return fiveStarAmount;
 	}
 
 
 
+	public void setFiveStarAmount(int fiveStarAmount) {
+		this.fiveStarAmount = fiveStarAmount;
+	}
+
+
+
+	public int getFourStarAmount() {
+		return fourStarAmount;
+	}
+
+
+
+	public void setFourStarAmount(int fourStarAmount) {
+		this.fourStarAmount = fourStarAmount;
+	}
+
+
+
+	public int getThreeStarAmount() {
+		return threeStarAmount;
+	}
+
+
+
+	public void setThreeStarAmount(int threeStarAmount) {
+		this.threeStarAmount = threeStarAmount;
+	}
+
+
+
+	public int getTwoStarAmount() {
+		return twoStarAmount;
+	}
+
+
+
+	public void setTwoStarAmount(int twoStarAmount) {
+		this.twoStarAmount = twoStarAmount;
+	}
+
+
+
+	public int getOneStarAmount() {
+		return oneStarAmount;
+	}
+
+
+
+	public void setOneStarAmount(int oneStarAmount) {
+		this.oneStarAmount = oneStarAmount;
+	}
+
+
+
+	public float getAverageRate() {
+		return averageRate;
+	}
+
+
+
+	public void setAverageRate(float averageRate) {
+		this.averageRate = averageRate;
+	}
+
+
+
+	/*
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_at")
 	public Date getCreated_at() {
@@ -256,7 +422,7 @@ public class Product extends BaseModel {
 	public void setUpdated_at(Date updated_at) {
 		this.updated_at = updated_at;
 	}
-
+*/
 	public static Product findBySourceOjbectId(String sourceObjectId) {
 		try {
 			EntityManager entityManager = MyEntityManagerFactory.getInstance();
@@ -267,7 +433,7 @@ public class Product extends BaseModel {
 
 	}
 
-	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, int version) {
+	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, long version) {
 		return Product.createOrUpdateFromAwsApi(ilr, version, true);
 	}
 	/**
@@ -277,7 +443,7 @@ public class Product extends BaseModel {
 	 * @param overrider default is true. only overrider be set to false if paging..
 	 * @return
 	 */
-	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, int version, boolean overrider) {
+	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, long version, boolean overrider) {
 
 		EntityManager entityManager = MyEntityManagerFactory.getInstance();
 		
@@ -298,6 +464,10 @@ public class Product extends BaseModel {
 			                            .setParameter( "productId", p.getId() )
 			                            .executeUpdate();	
 			
+			// remove all prices.
+			//p.getPcSet().removeAll(p.getPcSet());
+			
+			
 			p.category_id = ilr.getCategoryId();
 			p.raw_xml_content_url = ilr.getRawXmlContentUrl();
 			p.raw_html_content_url = ilr.getRawHtmlContentUrl();
@@ -305,22 +475,42 @@ public class Product extends BaseModel {
 			p.review_url = ilr.getReviewUrl();
 			p.specification_url = ilr.getSpecificationUrl();
 			p.sales_rank = ilr.getSalesRank();
-			p.currency_code = ilr.getCurrencyCode();
-			p.price_amount = ilr.getPriceAmount();
 			p.is_valid = 1;
-			p.version = version;
-			p.updated_at = new Date();					
-		} else if (!overrider){
+			p.scraper_version = new ScraperVersion(version);
+			p.setFromReview(ilr.getReview());
+//			p.version = version;
+//			p.updated_at = new Date();	
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		} else if (!overrider && p.getScraper_version().getScraper_version() == 1L){
 			return p;
 		} else {		
 			p = new Product(ilr.getSourceObjectId(), ilr.getCategoryId(), ilr.getRawXmlContentUrl(),
 					ilr.getRawHtmlContentUrl(), ilr.getDescirption(), ilr.getReviewUrl(),
-					ilr.getSpecificationUrl(), ilr.getSalesRank(), ilr.getCurrencyCode(), ilr.getPriceAmount(), 1, version);
+					ilr.getSpecificationUrl(), ilr.getSalesRank(), ilr.getReview(), 1, version);
 					
 		}
+
+
+		Set<ProductPrice> pcSet = p.getPcSet();
+		if (pcSet == null) {
+			pcSet = new HashSet<ProductPrice>();			
+		} else if (pcSet.size() > 0) {
+			pcSet.clear();			
+		}
+		for(String priceCategory : ilr.getPriceList().keySet()) {
+			pcSet.add(ilr.getPriceList().get(priceCategory).toProductPrice(p));
+		}		
 		
+		p.setPcSet(pcSet);
+
 		// save or updated product
 		entityManager.persist(p);
+		
+		// build up price list
+//		Set<ProductPrice> pcSet = new HashSet<ProductPrice>();
+//		for(String priceCategory : ilr.getPriceList().keySet()) {
+//			entityManager.persist(ilr.getPriceList().get(priceCategory).toProductPrice(p));
+//		}		
 		
 		Iterator iterator = ilr.getImages().keySet().iterator();
 	       
