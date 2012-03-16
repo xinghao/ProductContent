@@ -12,6 +12,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+//drop table product_attribute_meta_keys;
+//drop table product_attributes;
+//drop table product_images;
+//drop table product_prices;
+//drop table product_conditions;
+//drop table product_reviews;
+//drop table product_specifications;
+//drop table products;
+//drop table providers;
+//drop table categories;
+
 @MappedSuperclass
 public class BaseModel implements Serializable {
 

@@ -6,5 +6,7 @@ public class ConfigElementTags {
 	public static final String AWS_ASSOCIATETAG = "AWS_ASSOCIATETAG";
 	public static final String AWS_ENDPOINT = "AWS_ENDPOINT";
 	public static final String AWS_API_VERSION = "AWS_API_VERSION";
+	public static final String AWS_BROWSER_NODE_ID_ELECTRONIC = "AWS_BROWSER_NODE_ID_ELECTRONIC";
+	
 
 }

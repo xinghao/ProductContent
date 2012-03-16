@@ -83,7 +83,7 @@ public class MyEntityManagerFactory {
 //		entityManager.getTransaction().begin();
 //        List<Provider> result = entityManager.createQuery( "from Provider", Provider.class ).getResultList();
 //		for ( Provider p : result ) {
-//			System.out.println( "Provider (" + p.getName() + ") : " + p.getCreated_at() );
+//			_logger.info( "Provider (" + p.getName() + ") : " + p.getCreated_at() );
 //		}
 //        entityManager.getTransaction().commit();
 //        entityManager.close();

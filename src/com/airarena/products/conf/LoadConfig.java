@@ -15,7 +15,7 @@ public class LoadConfig {
 	
 	public static void loadConfig(String configfilePath, String logFilePath) throws FileNotFoundException, IOException {
 		// Read log4j property file here
-		PropertyConfigurator.configure("conf/log4j.properties");
+		PropertyConfigurator.configure(logFilePath);
 		_logger.info("Loading app config");
 		
 		 // Read app's/api properties file.
@@ -24,7 +24,7 @@ public class LoadConfig {
         properties.load(new FileInputStream(configfilePath));
         for (String pKey :properties.stringPropertyNames()) {	        	
         	_logger.info("[Properties]Key=" + pKey + ", Value="+properties.getProperty(pKey));
-        	System.out.println("[Properties]Key=" + pKey + ", Value="+properties.getProperty(pKey));
+        	_logger.info("[Properties]Key=" + pKey + ", Value="+properties.getProperty(pKey));
         	System.setProperty(pKey, properties.getProperty(pKey));
         }	        
 		

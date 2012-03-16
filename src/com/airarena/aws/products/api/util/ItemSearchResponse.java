@@ -2,8 +2,10 @@ package com.airarena.aws.products.api.util;
 
 import java.util.ArrayList;
 
-public class ItemSearchResponse extends BasicApiRespose {
+import org.apache.log4j.Logger;
 
+public class ItemSearchResponse extends BasicApiRespose {
+	private static final Logger _logger = Logger.getLogger(ItemSearchResponse.class);
 	private int totalPage;
 	private int totalItems;
 	private int currentPage;
@@ -71,36 +73,36 @@ public class ItemSearchResponse extends BasicApiRespose {
 	public boolean isValidate() {
 
 		boolean success = true;
-		System.out.println("Validate Search response =====================");
+		_logger.info("Validate Search response =====================");
 
 
 		if (this.getTotalPage() <= 0 ) {
-			System.out.println("totalPage test failed!");
+			_logger.info("totalPage test failed!");
 			success = false;			
 		}
 
 		if (this.getTotalItems() <= 0 ) {
-			System.out.println("totalItems test failed!");
+			_logger.info("totalItems test failed!");
 			success = false;			
 		}
 		if (this.getCurrentPage() <= 0 ) {
-			System.out.println("currentPage test failed!");
+			_logger.info("currentPage test failed!");
 			success = false;			
 		}
 		if (this.getPageMaxNewPrice() <= 0 ) {
-			System.out.println("pageMaxNewPrice test failed!");
+			_logger.info("pageMaxNewPrice test failed!");
 			success = false;			
 		}
 		
 		if (!BasicApiRespose.validateList(this.getItemsIdList())) {
-			System.out.println("ItemsIdList test failed!");
+			_logger.info("ItemsIdList test failed!");
 			success = false;									
 		}
 		
 		if (!success) {
-			System.out.println("IemSearchResponse test failed!!!!!!!!!!!!!!!!!");
+			_logger.info("IemSearchResponse test failed!!!!!!!!!!!!!!!!!");
 		} else {
-			System.out.println("IemSearchResponse test passed!!!!!!!!!!!!!!!!!");
+			_logger.info("IemSearchResponse test passed!!!!!!!!!!!!!!!!!");
 		}
 		
 		return success;

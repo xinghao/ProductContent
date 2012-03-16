@@ -6,10 +6,15 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import com.airarena.products.aws.main.ProductContent;
+
 public abstract class BasicApiRequest {
+	
+	private static final Logger _logger = Logger.getLogger(BasicApiRequest.class);
 	
 	public static final String AWS_OPERATION_BROWSENODELOOKUP = "BrowseNodeLookup";	
 	public static final String AWS_OPERATION_ITEMSEARCH = "ItemSearch";
@@ -59,7 +64,7 @@ public abstract class BasicApiRequest {
         try {
             helper = SignedRequestsHelper.getInstance(apiConf.getAwsEndPoint(), apiConf.getAwsAccessKeyId(), apiConf.getAwsSecretKey());
         } catch (Exception e) {
-            e.printStackTrace();
+            _logger.error(e);
             return null;
         }
         
@@ -77,7 +82,7 @@ public abstract class BasicApiRequest {
         
         
         requestUrl = helper.sign(params);
-        System.out.println("Signed Request is \"" + requestUrl + "\"");
+        _logger.info("Signed Request is \"" + requestUrl + "\"");
         this.requestUrl = requestUrl;
         
         try {
@@ -98,9 +103,9 @@ public abstract class BasicApiRequest {
 	protected boolean validApiResponse(Document doc) throws AwsApiException {
 		try {
 		    Node requestProcessingTimeNode = doc.getElementsByTagName("RequestProcessingTime").item(0);
-		    //System.out.println("Result Time = " + requestProcessingTimeNode.getTextContent());	
+		    //_logger.info("Result Time = " + requestProcessingTimeNode.getTextContent());	
 		    Node validNode = doc.getElementsByTagName("IsValid").item(0);
-		    //System.out.println("isValid? = " + validNode.getTextContent());
+		    //_logger.info("isValid? = " + validNode.getTextContent());
 		    if (validNode.getTextContent().equalsIgnoreCase("False")) {
 		    	throw new AwsApiException("Response valid failed! valid equals false");
 		    }        	
@@ -111,6 +116,13 @@ public abstract class BasicApiRequest {
 		return true;
 	}
 	
+	
+	
+	public static String getPermalink(String source) {
+		String s1 = source.replaceAll("[^a-zA-Z0-9\\/_| -]", "").trim();
+		//_logger.info(s1);
+		return s1.trim().replaceAll("[\\/_| -]+", "-").replaceAll("(^-)+|(-$)+", "");		
+	}
 	
 	protected abstract BasicApiRespose parseResponse(Document doc) throws AwsApiException;
 

@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -43,7 +45,7 @@ public class Product extends BaseModel {
     private Long id;
     
 	private String source_object_id;	
-	private Category category;
+	private Set<Category> categories;
 	private String raw_xml_content_url;
 	private String raw_html_content_url;
 	private String descirption;
@@ -116,13 +118,16 @@ public class Product extends BaseModel {
 		}
 	}
 	
-	public Product(String source_bject_id, Category category, String rawXmlContentUrl,
+	public Product(String source_bject_id, Set<Category> categories, String rawXmlContentUrl,
 			String rawHtmlContentUrl, String descirption, String reviewUrl,
 			String specificationUrl, Long salesRank,  Review review, HashMap<String, String> specifications, int is_valid, long version) {
 		super();
 		this.source_object_id = source_bject_id;
 		//this.category_id = category_id;
-		this.category = category;
+//		this.category = category;
+
+		this.setCategories(categories);
+		
 		this.raw_xml_content_url = rawXmlContentUrl;
 		this.raw_html_content_url = rawHtmlContentUrl;
 		this.descirption = descirption;
@@ -177,23 +182,26 @@ public class Product extends BaseModel {
 	public String getDescirption() {
 		return descirption;
 	}
-
-	@ManyToOne
-    @JoinColumn(name="category_id")		
-	@org.hibernate.annotations.Index(name = "myProductCategoryIndex")
-	public Category getCategory() {
-		return category;
-	}
-
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-
 	public void setDescirption(String descirption) {
 		this.descirption = descirption;
 	}
+
+	
+	@ManyToMany
+	@JoinTable(name="category_product",
+		      joinColumns={@JoinColumn(name="provider_id")},
+		      inverseJoinColumns={@JoinColumn(name="category_id")})	
+	@org.hibernate.annotations.Index(name = "myProductCategoryIndex")
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+
 
 
 
@@ -473,10 +481,11 @@ public class Product extends BaseModel {
 	 * 
 	 * @param ilr
 	 * @param version
-	 * @param overrider default is true. only overrider be set to false if paging..
+	 * @param overrider default is true. should never set it to false.....
 	 * @return
 	 */
 	public static Product createOrUpdateFromAwsApi(ItemLookupResponse ilr, long version, boolean overrider) {
+
 
 		EntityManager entityManager = MyEntityManagerFactory.getInstance();
 		
@@ -502,7 +511,18 @@ public class Product extends BaseModel {
 			
 			
 			//p.category_id = ilr.getCategoryId();
-			p.setCategory(ilr.getCategory());
+//			p.setCategory(ilr.getCategory());
+			if (p.getScraper_version().getScraper_version() == version) {
+				if (!p.getCategories().contains(ilr.getCategory())) {
+					p.getCategories().add(ilr.getCategory());
+				}
+			} else {
+				Set<Category> chs = p.getCategories();
+				chs.clear();
+				chs.add(ilr.getCategory());				
+				p.setCategories(chs);
+			}
+			
 			p.raw_xml_content_url = ilr.getRawXmlContentUrl();
 			p.raw_html_content_url = ilr.getRawHtmlContentUrl();
 			p.descirption = ilr.getDescirption();
@@ -516,10 +536,13 @@ public class Product extends BaseModel {
 //			p.version = version;
 //			p.updated_at = new Date();	
 			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		} else if (!overrider && p.getScraper_version().getScraper_version() == 1L){
+		} else if (!overrider){
 			return p;
-		} else {		
-			p = new Product(ilr.getSourceObjectId(), ilr.getCategory(), ilr.getRawXmlContentUrl(),
+		} else {	
+			HashSet<Category> chs = new HashSet<Category>();
+			chs.add(ilr.getCategory());
+			
+			p = new Product(ilr.getSourceObjectId(), chs, ilr.getRawXmlContentUrl(),
 					ilr.getRawHtmlContentUrl(), ilr.getDescirption(), ilr.getReviewUrl(),
 					ilr.getSpecificationUrl(), ilr.getSalesRank(), ilr.getReview(), ilr.getTechnicalDetailList(), 1, version);
 					
@@ -572,24 +595,9 @@ public class Product extends BaseModel {
 		
 	}
 	
-	public static Long getMaxCategoryIdAlreadyExist(int version) {
-		try {
-			EntityManager entityManager = MyEntityManagerFactory.getInstance();
-			entityManager.getTransaction().begin();
-			
-			
-			Long maxId  = (Long) entityManager.createQuery("select max(category_id) from " + Product.class.getName() + " where version = :version", Long.class ).setParameter("version", version).getSingleResult();
-
-			
-	        entityManager.getTransaction().commit();
-	        
-	        return maxId;
-	        
-		}catch(NoResultException e) {
-			return -1L;
-		}		
-	}
 	
+	
+	/*
 	public static void deleteAllProductsForCategory(int version, Long categoryId) {
 
 		try {
@@ -607,7 +615,7 @@ public class Product extends BaseModel {
 			for(int i=1; i < ps.size(); ++i) {
 				sb.append("," + ps.get(i).getId()); 
 			}
-			System.out.println(sb.toString());
+			_logger.info(sb.toString());
 			
 			Query Imageuery = entityManager.createQuery("delete from ProductImage pi "
 	                + "where pi.version = :version and pi.product_id in (" + sb.toString() + ")");
@@ -635,6 +643,6 @@ public class Product extends BaseModel {
 
 		
 	}
-	
+	*/
 	
 }

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
 
+import com.airarena.aws.products.api.util.AwsApiException;
 import com.airarena.aws.products.api.util.BasicApiRequest;
 import com.airarena.aws.products.api.util.BrowserNodeLookupRequest;
 import com.airarena.aws.products.api.util.BrowserNodelLookupResponse;
@@ -20,9 +21,12 @@ import com.airarena.hibernate.util.InitDB;
 import com.airarena.hibernate.util.MyEntityManager;
 import com.airarena.hibernate.util.MyEntityManagerFactory;
 import com.airarena.product.test.TestItemLookUp;
+import com.airarena.products.conf.ConfigElementTags;
 import com.airarena.products.conf.LoadConfig;
 import com.airarena.products.model.Category;
 import com.airarena.products.model.Product;
+import com.airarena.products.model.ScrapingStatus;
+import com.airarena.scraper.ScrapingException;
 
 public class ProductContent {
 	
@@ -34,16 +38,16 @@ public class ProductContent {
 	
 	private static HashMap<String, String> tmpList = new HashMap<String, String>();
 	
-	private static void buildCategories(String sourceObjectId, Long parentId) {
+	private static void buildCategories(String sourceObjectId, Long parentId, Long providerId, Long scraperVersion) {
 
 		BasicApiRequest bar = new BrowserNodeLookupRequest(sourceObjectId);
 		BrowserNodelLookupResponse b = (BrowserNodelLookupResponse) bar.call();
-		Category c = new Category(b.getName(), sourceObjectId, null, parentId, b.getChildrenSourceObjectId().size(), 1, -1);
-		MyEntityManager mem = new MyEntityManager();
-		mem.newModel(c);
-		System.out.println(b.toString());
+		//Category c = new Category(b.getName(), sourceObjectId, null, parentId, b.getChildrenSourceObjectId().size(), 1, -1);
+		Category c = Category.createOrUpdateFromAwsApi(b, parentId, providerId, scraperVersion, true);
+
+		//System.out.println(b.toString());
 		for(int i=0; i < b.getChildrenSourceObjectId().size(); i++) {
-			buildCategories(b.getChildrenSourceObjectId().get(i), c.getId());
+			buildCategories(b.getChildrenSourceObjectId().get(i), c.getId(), providerId, scraperVersion);
 		}
 		
 	}
@@ -58,11 +62,11 @@ public class ProductContent {
 	}
 	
 	
-	private static ItemSearchResponse buildOnePageProductsForCategory(Category c, int page, String sort, Long maxPrice, int version) {
+	private static ItemSearchResponse buildOnePageProductsForCategory(Category c, int page, String sort, Long maxPrice, long version) {
 		
 		BasicApiRequest bar = new ItemSearchRequest(c.getSource_object_id(), BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, page, sort, maxPrice);
 		ItemSearchResponse b = (ItemSearchResponse) bar.call();
-		System.out.println(b);
+//		System.out.println(b);
 		
 		int totalItemsFetched = 0;
 		int ignore = 0;
@@ -72,26 +76,26 @@ public class ProductContent {
 			}
 			tmpList.put(b.getItemsIdList().get(i), b.getItemsIdList().get(i));
 		}
-		System.out.println("ignore: " + ignore);
-	/*	
+		_logger.info("ignore: " + ignore);
+
 		for(int i = 0; i<10 && i< b.getTotalItems(); i++ ) {
 			try {
 				String productSourceObjectId = b.getItemsIdList().get(i);
-				System.out.println(productSourceObjectId);
+				_logger.info(productSourceObjectId);
 				buildAProduct(productSourceObjectId, c, version);
 				totalItemsFetched++;
-				Thread.sleep(800);
+				Thread.sleep(100);
 			} catch (Exception e) {				
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				_logger.error(e);
 			}
 		}
-	*/	
+	
 		return b;
 		
 	}
 	
-	private static Long buildAllProductsForCategory(Category c, int version) {
+	private static Long buildAllProductsForCategory(Category c, long version) {
 		int totalPagesFetched = 0;
 		Long currentLowPrice = 0L;
 		int currentPageNumberInTen = 0;
@@ -107,13 +111,13 @@ public class ProductContent {
 			if (b.getItemsIdList().size() < 10 || b.getTotalPage() == currentPageNumberInTen) {
 				return totalItemsFetched;
 			}
-			System.out.println("Fetch size: " + b.getItemsIdList().size());
+			_logger.info("Fetch size: " + b.getItemsIdList().size());
 			
 			// reset page number and low price for every 10 pages.
 			if (currentPageNumberInTen == 10) {
 				currentPageNumberInTen = 0;
 				if (currentLowPrice == b.getPageMaxNewPrice()) {
-					System.out.println("!!!!!!!!!!!!!!!!! products missing for price: " + currentLowPrice + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+					_logger.info("!!!!!!!!!!!!!!!!! products missing for price: " + currentLowPrice + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 					currentLowPrice += 1;
 				} else {
 					currentLowPrice = b.getPageMaxNewPrice();
@@ -121,6 +125,65 @@ public class ProductContent {
 			}
 		}
 		
+	}
+	
+	public static void start(boolean isResume) {
+		
+		InitDB.insertInitData();
+		ScrapingStatus ss = null;
+		Category resumeFromCategory = null; 
+		try {
+			ss = ScrapingStatus.nextNewScrapingVersion(false);
+			
+			// running api test.
+			if (TestItemLookUp.test()) {
+				_logger.info("Test passed!");
+			} else {
+				throw new AwsApiException("Test failed!");
+			}					
+			
+			boolean isBuildCategories = true;
+			if (isResume) {
+				resumeFromCategory = ScrapingStatus.getMaxCategoryIdAlreadyExist(ss.getScraper_version().getScraper_version());
+				_logger.info("resume mode, max category id: " + resumeFromCategory.getId());
+				if (resumeFromCategory != null) {
+					isBuildCategories = false;
+				}
+			}
+			
+			if (isBuildCategories) {
+				buildCategories((String) System.getProperty(ConfigElementTags.AWS_BROWSER_NODE_ID_ELECTRONIC),  null, 1L, ss.getScraper_version().getScraper_version());
+			}
+
+			List<Category> cs = Category.getLeafCatgories(ss.getScraper_version().getScraper_version());
+			for(int i=0; i< cs.size(); i++) {
+				boolean isOverride = true;
+				if (isResume && resumeFromCategory != null && i < resumeFromCategory.getId()) {
+					_logger.info("resume mode, skip: " + i);
+					continue;
+				} 
+				
+				Category c = cs.get(i);
+				ss.setCategory(c);
+				ss.save();
+				buildAllProductsForCategory(c, ss.getScraper_version().getScraper_version());
+				//System.out.println("Total:" + buildAllProductsForCategory(c, 1));
+				//System.out.println("Total in list:" + tmpList.size());
+				break;
+			}
+			
+			ss.setStatus(ScrapingStatus.SUCCESS);
+			ss.save();
+
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+	    	_logger.error(e);
+			e.printStackTrace();
+			if (ss != null) {
+				ss.setStatus(ScrapingStatus.ERROR);
+				ss.save();						
+			}
+		}		
 	}
 	/**
 	 * @param args
@@ -133,6 +196,8 @@ public class ProductContent {
 		// Load config
 		try{
 			LoadConfig.loadConfig(configFilePath, logFilePath);
+//			System.out.println("args: " + args.length);
+//			System.out.println("args: " + args[0]);
 			if (args.length == 0) {
 				System.out.println("please append the run options[1-4] to the end of command line.");
 				System.out.println("1. Init db. Only run when migrate to a new database");
@@ -147,25 +212,47 @@ public class ProductContent {
 				InitDB.insertInitData();
 				break;
 			case 2:
-				System.out.println("case 2 is coming soon");
+				_logger.info("Run a brand new AWS scraping");
+				start(false);
 				break;
 			case 3:
-				System.out.println("case 3 is coming soon");
+				_logger.info("resume current AWS scraping");
+				start(true);
 				break;
 			case 4:
-				System.out.println("case 4 is coming soon");
+				_logger.info("case 4 is coming soon");
 				break;
 			case 5:
-				System.out.println("case 5 is testing");
+				_logger.info("case 5 is testing");
 
 				if (TestItemLookUp.test()) {
-					System.out.println("Test passed!");
+					_logger.info("Test passed!");
 				}
 				break;				
 			case 99:
 				
-				System.out.println("debug mode");
+				_logger.info("debug mode");
 				InitDB.insertInitData();
+				
+				Category maxCategoryIdScraped = ScrapingStatus.getMaxCategoryIdAlreadyExist(1L);
+
+				
+				if (maxCategoryIdScraped == null) {
+					_logger.info("haha: " + "0");
+				} else {
+					_logger.info("haha: " + maxCategoryIdScraped.getName());
+				
+				}
+				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+				try{
+					ScrapingStatus ss = ScrapingStatus.nextNewScrapingVersion(true);
+					ss.setCategory(entityManager.find(Category.class, 6L));
+					ss.save();
+				}catch(Exception e) {
+					
+				}
+				//System.out.println(ScrapingStatus.getMaxScrapingVersion());
+//				ScrapingStatus ss = ScrapingStatus.nextNewScrapingVersion(true); 
 				//images B004LDG9IO
 				// no primary images B004N866SU
 //				BasicApiRequest itml = new ItemLookupRequest("B004LDG9IO", 1, 1);
@@ -173,9 +260,16 @@ public class ProductContent {
 //				System.out.println(ilrb.toString());
 //				ilrb.setCategoryId(1L);
 //				Product p = Product.createOrUpdateFromAwsApi(ilrb, 1);	
-				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+
+//				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+//				
+//				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 1L), 1L);
+//				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 2L), 1L);
+//				ss.setStatus(ScrapingStatus.SUCCESS);
+//				ss.save();
 				
-				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 1L), 1L);
+//				BasicApiRequest itms = new ItemSearchRequest("3224438011", BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, 1, null, null);
+//				ItemSearchResponse itsr = (ItemSearchResponse)itms.call();
 				
 				break;
 			default:
@@ -235,8 +329,8 @@ public class ProductContent {
 	    	_logger.error("can not find/read property file " + configFilePath);
 	    	System.out.println("can not find/read property file" + configFilePath);
 	    	return;
-	    }
-	    //http://docs.amazonwebservices.com/AWSECommerceService/2011-08-01/DG/RG_OfferSummary.html
+		}
+	  //http://docs.amazonwebservices.com/AWSECommerceService/2011-08-01/DG/RG_OfferSummary.html
 
 	}
 

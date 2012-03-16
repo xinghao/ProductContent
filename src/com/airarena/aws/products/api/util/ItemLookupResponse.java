@@ -3,13 +3,18 @@ package com.airarena.aws.products.api.util;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 import com.airarena.product.resources.*;
 import com.airarena.products.model.Category;
 import com.airarena.products.model.Product;
 
 public class ItemLookupResponse extends BasicApiRespose {
-
+	private static final Logger _logger = Logger.getLogger(ItemLookupResponse.class);
+	
 	private String sourceObjectId;
 //	private String name;
 //	private String Manufacturer;
@@ -34,8 +39,7 @@ public class ItemLookupResponse extends BasicApiRespose {
 	public String getSourceObjectId() {
 		return sourceObjectId;
 	}
-
-
+	
 	public void setSourceObjectId(String sourceObjectId) {
 		this.sourceObjectId = sourceObjectId;
 	}
@@ -290,78 +294,85 @@ public class ItemLookupResponse extends BasicApiRespose {
 	@Override
 	public boolean isValidate() {
 		boolean success = true;
-		System.out.println("Validate Lookup response =====================");
+		_logger.info("Validate Lookup response =====================");
 
 		if (!BasicApiRespose.validateString(this.getSourceObjectId())) {
-			System.out.println("source object test failed!");
+			_logger.info("source object test failed!");
 			success = false;			
 		}
 		
 		if (!BasicApiRespose.validateString(this.getRawXmlContentUrl())) {
-			System.out.println("rawXmlContentUrl test failed!");
+			_logger.info("rawXmlContentUrl test failed!");
 			success = false;			
 		}
 
 		if (!BasicApiRespose.validateString(this.getReviewUrl())) {
-			System.out.println("reviewUrl test failed!");
+			_logger.info("reviewUrl test failed!");
 			success = false;			
 		}
 		
 		if (!BasicApiRespose.validateString(this.getSpecificationUrl())) {
-			System.out.println("specificationUrl test failed!");
+			_logger.info("specificationUrl test failed!");
 			success = false;			
 		}
 
 		if (!BasicApiRespose.validateString(this.getRawHtmlContentUrl())) {
-			System.out.println("rawHtmlContentUrl test failed!");
+			_logger.info("rawHtmlContentUrl test failed!");
 			success = false;			
 		}
 
 		if (!BasicApiRespose.validateString(this.getDescirption())) {
-			System.out.println("descirption test failed!");
+			_logger.info("descirption test failed!");
 			success = false;			
 		}
 		
+		if (!BasicApiRespose.validateString(this.getPermalink())) {
+			_logger.info("Permalink test failed!");
+			success = false;			
+		}
+		
+		
 //		if (this.getCategory(). <= 0) {
-//			System.out.println("categoryId test failed!");
+//			_logger.info("categoryId test failed!");
 //			success = false;			
 //		}
 		
 		if (this.getSalesRank() <= 0 ) {
-			System.out.println("salesRank test failed!");
+			_logger.info("salesRank test failed!");
 			success = false;						
 		}
 		
 		if (!BasicApiRespose.validateMap(this.getImages())) {
-			System.out.println("images test failed!");
+			_logger.info("images test failed!");
 			success = false;									
 		}
 
 		if (!BasicApiRespose.validateMap(this.getItemAttributes())) {
-			System.out.println("itemAttributes test failed!");
+			_logger.info("itemAttributes test failed!");
 			success = false;									
 		}
 
 		if (!BasicApiRespose.validateMap(this.getPriceList())) {
-			System.out.println("priceList test failed!");
+			_logger.info("priceList test failed!");
 			success = false;									
 		}
 
 		if (!BasicApiRespose.validateMap(this.getTechnicalDetailList())) {
-			System.out.println("technicalDetailList test failed!");
+			_logger.info("technicalDetailList test failed!");
 			success = false;									
 		}
 		
 		if (!this.getReview().isValidate()) {
-			System.out.println("review test failed!");
-			System.out.println(this.getReview().toString());
+			_logger.info("review test failed!");
+			_logger.info(this.getReview().toString());
 			success = false;												
 		}
 
+		
 		if (!success) {
-			System.out.println("IemLookupResponse test failed!!!!!!!!!!!!!!!!!");
+			_logger.info("IemLookupResponse test failed!!!!!!!!!!!!!!!!!");
 		} else {
-			System.out.println("IemLookupResponse test passed!!!!!!!!!!!!!!!!!");
+			_logger.info("IemLookupResponse test passed!!!!!!!!!!!!!!!!!");
 		}
 		
 		return success;
@@ -380,20 +391,20 @@ public class ItemLookupResponse extends BasicApiRespose {
 //
 //		BasicApiRequest itml = new ItemLookupRequest(sourceObjectId, 1, 1);
 //		ItemLookupResponse ilrb = (ItemLookupResponse) itml.call();
-//		System.out.println(ilrb);
+//		_logger.info(ilrb);
 //		
 //		if (ilrb.getTechnicalDetailList().isEmpty()) {
-//			System.out.println("Technical Detail test failed!");
+//			_logger.info("Technical Detail test failed!");
 //			success = false;
 //		}
-//		//System.out.println(ilrb.getReview());
+//		//_logger.info(ilrb.getReview());
 //		if (ilrb.getReview() == null || !ilrb.getReview().isValidate()) {
-//			System.out.println("Review test failed!");
+//			_logger.info("Review test failed!");
 //			success = false;				
 //		}
 //		
 //		if (ilrb.getImages() == null || ilrb.getImages().isEmpty()) {
-//			System.out.println("Image test failed!");
+//			_logger.info("Image test failed!");
 //			success = false;								
 //		}
 //			
@@ -401,5 +412,21 @@ public class ItemLookupResponse extends BasicApiRespose {
 //		return success;
 //
 //	}
+
+	public String getPermalink() {
+		String returnStr;
+		String url = this.getRawHtmlContentUrl();
+		Pattern p = Pattern.compile("com\\/(.*)\\/dp",  Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(url);
+
+		if (m.find()) {
+		returnStr = m.group(1).trim();
+		
+		return returnStr;
+		}
+		else return null;
+		
+	}
+	
 
 }

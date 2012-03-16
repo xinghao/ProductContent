@@ -4,15 +4,17 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.airarena.aws.products.api.util.BasicApiRespose;
+import com.airarena.hibernate.util.InitDB;
 import com.airarena.product.resources.Review;
 import com.airarena.product.resources.Review.ReviewDetail;
 
 public class AwsScraper extends Scraper {
-
+	private static final Logger _logger = Logger.getLogger(AwsScraper.class);
 	public AwsScraper() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -41,7 +43,7 @@ public class AwsScraper extends Scraper {
 		if (totalAmountTag != null) {
 			hasReview = true;
 			review.setTotalReviewsAmount(Integer.valueOf(totalAmountTag.html().toLowerCase().replaceAll("reviews", "").trim()));
-			//System.out.println(totalReviewAmount);
+			//_logger.info(totalReviewAmount);
 		}		
 		
 		Elements starAmountTags = summaryContainerTag.select("div > table tr");
@@ -52,19 +54,19 @@ public class AwsScraper extends Scraper {
 				String starName = whichStar.child(0).html();
 				if (starName.startsWith("5")) {						
 					review.setFiveStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
-//					System.out.println(fiveStarAmount);
+//					_logger.info(fiveStarAmount);
 				} else if (starName.startsWith("4")) {						
 					review.setFourStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
-					//System.out.println(fourStarAmount);
+					//_logger.info(fourStarAmount);
 				} else if (starName.startsWith("3")) {						
 					review.setThreeStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
-					//System.out.println(threeStarAmount);
+					//_logger.info(threeStarAmount);
 				} else if (starName.startsWith("2")) {						
 					review.setTwoStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
-					//System.out.println(twoStarAmount);
+					//_logger.info(twoStarAmount);
 				} else if (starName.startsWith("1")) {						
 					review.setOneStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
-					//System.out.println(oneStarAmount);
+					//_logger.info(oneStarAmount);
 				}
 			}
 		}		
@@ -73,7 +75,7 @@ public class AwsScraper extends Scraper {
 		if (averageAmountTag != null) {
 			hasReview = true;
 			review.setAverageRate(Float.valueOf(averageAmountTag.html().replaceAll("out of 5 stars", "").trim()));
-			//System.out.println(avr);
+			//_logger.info(avr);
 		}		
 		
 		
@@ -96,20 +98,20 @@ public class AwsScraper extends Scraper {
 							rd.setSubmitAt(BasicApiRespose.reviewDate(t.get(1).html().replaceAll(",", "")));
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							_logger.error(e);
 						}
-						//System.out.println();
+						//_logger.info();
 					} 
 					if (t.size() >= 1) {
 						rd.setTitle(t.get(0).html());
-						//System.out.println(t.get(0).html());
+						//_logger.info(t.get(0).html());
 					}
 				} 
 				if (rateAndTitle.size() >= 1) {
 					Element rate = rateAndTitle.get(0).select("span > span > span").first();
 					if (rate != null) {
 						rd.setRate(Float.valueOf(rate.html().replaceAll("out of 5 stars", "").trim()));
-						//System.out.println(rate.html().replaceAll("out of 5 stars", "").trim());
+						//_logger.info(rate.html().replaceAll("out of 5 stars", "").trim());
 					}						
 					
 				}
@@ -124,18 +126,18 @@ public class AwsScraper extends Scraper {
 						if (address != null && !address.isEmpty()) {
 							rd.setAddress(address);
 						}
-						//System.out.println(address);
+						//_logger.info(address);
 						if (namAndAdressDiv.children().size() > 0) {
 							Element nameTag = namAndAdressDiv.children().get(0);
 							if (nameTag.children().size() > 0) {
 								String name = nameTag.child(0).html();
 								rd.setAuthor(name);
-								//System.out.println(name);
+								//_logger.info(name);
 							}
 						}
 					}
 				}
-				//System.out.println(review.child(0).html());
+				//_logger.info(review.child(0).html());
 			}
 			// get ride of all the rubbish from websites
 			if (!rd.isNull()) review.getRds().add(rd);
@@ -156,7 +158,7 @@ public class AwsScraper extends Scraper {
 		Elements firstLevelTags = containerDiv.select("div.content > h3");
 		for (Element fTag : firstLevelTags) {
 		  if (fTag.html().equalsIgnoreCase("Technical Details".toLowerCase()))  {			  
-			  //System.out.println(fTag.html());
+			  //_logger.info(fTag.html());
 			  tdElement = getNextElement(fTag, "div");
 			  			  			  
 		  }
@@ -165,10 +167,10 @@ public class AwsScraper extends Scraper {
 			Elements tds = tdElement.select("li");
 			for (Element td : tds) {
 //				System.out.print(td.child(0).text() + "=");
-//				System.out.println(Scraper.replaceBeginning(td.ownText().trim(), ":"));
+//				_logger.info(Scraper.replaceBeginning(td.ownText().trim(), ":"));
 				retHash.put(td.child(0).text(), Scraper.replaceBeginning(td.ownText().trim(), ":"));
 			}			
-//			System.out.println(tdElement.html());
+//			_logger.info(tdElement.html());
 		}
 		return retHash;
 		

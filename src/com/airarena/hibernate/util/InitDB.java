@@ -1,23 +1,26 @@
 package com.airarena.hibernate.util;
 
+import org.apache.log4j.Logger;
+
+import com.airarena.aws.products.api.util.ItemSearchResponse;
 import com.airarena.products.model.*;
 
 public class InitDB {
-	
+	private static final Logger _logger = Logger.getLogger(InitDB.class);
 	// should only be run when we create database
 	public static void insertInitData() {
 		
 		if (ProductAttributeMetaKey.loadKeys().size() == 0 ) {
 			insertProductMetaKeys();
-			System.out.println("MetaKey loading/Provider is successful!");
+			_logger.info("MetaKey loading/Provider is successful!");
 		} else {
-			System.out.println("MetaKey/Provider already been loaded?");
+			_logger.info("MetaKey/Provider already been loaded?");
 		}
 		if (ProductCondition.loadKeys().size() == 0) {
 			insertProductConditions();
-			System.out.println("Price Condition loading is successful!");
+			_logger.info("Price Condition loading is successful!");
 		} else {
-			System.out.println("Price conditions already been loaded?");
+			_logger.info("Price conditions already been loaded?");
 		}
 	}
 

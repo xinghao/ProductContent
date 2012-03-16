@@ -73,7 +73,7 @@ public class Scraper {
 
 //		if (this.connectionHeader != null) {
 //			for(String key : this.connectionHeader.keySet()) {
-//				System.out.println("Scraper header: " + key + "=" + this.connectionHeader.get(key));
+//				_logger.info("Scraper header: " + key + "=" + this.connectionHeader.get(key));
 //			}
 //		}
 //		String returnHtml = HttpConnection.get(url, this.connectionHeader);
@@ -82,10 +82,10 @@ public class Scraper {
 //
 //		if (m.find()) {
 //			String returnStr = m.group(1).trim();
-//		    System.out.println(returnStr);
+//		    _logger.info(returnStr);
 //		    return returnStr;
 //		} else {
-//			   System.out.println("Nothing found");
+//			   _logger.info("Nothing found");
 //		}		
 //		
 	}

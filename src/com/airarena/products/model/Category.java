@@ -9,20 +9,28 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.airarena.aws.products.api.util.BasicApiRequest;
+import com.airarena.aws.products.api.util.BrowserNodelLookupResponse;
+import com.airarena.aws.products.api.util.ItemLookupResponse;
 import com.airarena.hibernate.util.MyEntityManagerFactory;
 
 @Entity
 @Table( name = "categories" )
+@NamedQuery(name="category.findBySourceObjectId", query="select n from Category n where source_object_id = :sourceObjectId")
 public class Category extends BaseModel{
     private Long id;
 
@@ -63,6 +71,44 @@ public class Category extends BaseModel{
 //			this.version = version;
 //		this.updated_at = this.created_at = new Date();
 	}
+	
+	public static Category findBySourceOjbectId(String sourceObjectId) {
+		try {
+			EntityManager entityManager = MyEntityManagerFactory.getInstance();
+			 Query q = entityManager.createNamedQuery("category.findBySourceObjectId");
+			 return (Category) q.setParameter("sourceObjectId", sourceObjectId).getSingleResult();
+		} catch (NoResultException e) {
+			return null;			
+		}
+
+	}
+
+	
+	public static Category createOrUpdateFromAwsApi(BrowserNodelLookupResponse rnlr, Long parent_id, Long provider_id, long version, boolean overrider) {
+
+		EntityManager entityManager = MyEntityManagerFactory.getInstance();
+		
+		Category c = findBySourceOjbectId(rnlr.getSourceObjectId());
+		
+		entityManager.getTransaction().begin();
+		
+		if (c == null) {
+			c = new Category();
+		} 
+		c.setIs_valid(1);
+		c.setName(rnlr.getName());
+		c.setParent_id(parent_id);
+		c.setProvider_id(provider_id);
+		c.setScraper_version(new ScraperVersion(version));
+		c.setSource_object_id(rnlr.getSourceObjectId());
+		c.setSubcategories_count(rnlr.getChildrenSourceObjectId().size());
+		c.setPermalink(BasicApiRequest.getPermalink(c.getName()));
+		entityManager.persist(c);
+		
+		entityManager.getTransaction().commit();
+		return c;
+	}
+		
 
 	@Id
 	@GeneratedValue(generator="increment")
@@ -163,7 +209,7 @@ public class Category extends BaseModel{
 //		this.updated_at = updated_at;
 //	}
 	
-	@OneToMany(mappedBy="category",orphanRemoval=true, cascade=CascadeType.ALL)	
+	@ManyToMany(mappedBy="categories", cascade=CascadeType.ALL, fetch=FetchType.LAZY)	
 	public Set<Product> getProducts() {
 		return products;
 	}
@@ -181,12 +227,12 @@ public class Category extends BaseModel{
 		this.scraper_version = scraper_version;
 	}
 
-	public static List<Category> getLeafCatgories(Long categoryId) {
+	public static List<Category> getLeafCatgories(long version) {
 		try {
 			EntityManager entityManager = MyEntityManagerFactory.getInstance();
 			entityManager.getTransaction().begin();
 			
-			List<Category> results = entityManager.createQuery( "from " + Category.class.getName() + " where subcategories_count = 0 order by id", Category.class ).getResultList();
+			List<Category> results = entityManager.createQuery( "from " + Category.class.getName() + " where subcategories_count = 0 and scraper_version = :scraperVersion order by id", Category.class ).setParameter("scraperVersion", new ScraperVersion(version)).getResultList();
 			
 	        entityManager.getTransaction().commit();
 	        

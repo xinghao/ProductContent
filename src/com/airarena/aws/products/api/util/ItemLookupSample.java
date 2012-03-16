@@ -27,6 +27,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -39,6 +40,7 @@ import org.w3c.dom.Node;
  * configuring and running the sample.
  */
 public class ItemLookupSample {
+	private static final Logger _logger = Logger.getLogger(ItemLookupSample.class);
     /*
      * Your AWS Access Key ID, as taken from the AWS Your Account page.
      */
@@ -80,7 +82,7 @@ public class ItemLookupSample {
         try {
             helper = SignedRequestsHelper.getInstance(ENDPOINT, AWS_ACCESS_KEY_ID, AWS_SECRET_KEY);
         } catch (Exception e) {
-            e.printStackTrace();
+            _logger.error(e);
             return;
         }
         
@@ -92,7 +94,7 @@ public class ItemLookupSample {
         /*
          * Here is an example in map form, where the request parameters are stored in a map.
          */
-        System.out.println("Map form example:");
+        _logger.info("Map form example:");
         Map<String, String> params = new HashMap<String, String>();
         params.put("Service", "AWSECommerceService");
         params.put("Version", "2011-08-01");
@@ -102,23 +104,23 @@ public class ItemLookupSample {
         params.put("ResponseGroup", "Small");
 
         requestUrl = helper.sign(params);
-        System.out.println("Signed Request is \"" + requestUrl + "\"");
+        _logger.info("Signed Request is \"" + requestUrl + "\"");
 
         title = fetchTitle(requestUrl);
-        System.out.println("Signed Title is \"" + title + "\"");
-        System.out.println();
+        _logger.info("Signed Title is \"" + title + "\"");
+        //_logger.info();
 
         /* Here is an example with string form, where the requests parameters have already been concatenated
          * into a query string. */
-//        System.out.println("String form example:");
+//        _logger.info("String form example:");
 //        String queryString = "Service=AWSECommerceService&Version=2009-03-31&Operation=ItemLookup&ResponseGroup=Small&ItemId="
 //                + ITEM_ID;
 //        requestUrl = helper.sign(queryString);
-//        System.out.println("Request is \"" + requestUrl + "\"");
+//        _logger.info("Request is \"" + requestUrl + "\"");
 //
 //        title = fetchTitle(requestUrl);
-//        System.out.println("Title is \"" + title + "\"");
-//        System.out.println();
+//        _logger.info("Title is \"" + title + "\"");
+//        _logger.info();
 
     }
 

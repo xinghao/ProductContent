@@ -295,7 +295,7 @@ public class ItemLookupRequest extends BasicApiRequest {
 			// TODO Auto-generated catch block
 			throw new AwsApiException("Aws review scraping error: " + e);
 		}
-		//System.out.println(HttpConnection.get(this.ilr.getSpecificationUrl(), null));
+		//_logger.info(HttpConnection.get(this.ilr.getSpecificationUrl(), null));
 		
 //		Scraper s = new Scraper();
 //		s.scrape(this.ilr.getSpecificationUrl(), "<dic class=\"content\">(.*)</div>");

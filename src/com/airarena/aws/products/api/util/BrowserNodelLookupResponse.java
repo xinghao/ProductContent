@@ -2,16 +2,30 @@ package com.airarena.aws.products.api.util;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import com.airarena.products.aws.main.ProductContent;
 import com.airarena.products.model.Category;
 
 public class BrowserNodelLookupResponse extends BasicApiRespose {
+	private static final Logger _logger = Logger.getLogger(BrowserNodelLookupResponse.class);
 	
 	private String sourceObjectId;
 	private String name;
 	private String parentSourceObjectId;
 	private ArrayList<String> childrenSourceObjectId = new ArrayList<String>();
+	private Long parent_id;
 	
 	
+	
+	public Long getParent_id() {
+		return parent_id;
+	}
+
+	public void setParent_id(Long parent_id) {
+		this.parent_id = parent_id;
+	}
+
 	public String getSourceObjectId() {
 		return sourceObjectId;
 	}
@@ -68,34 +82,34 @@ public class BrowserNodelLookupResponse extends BasicApiRespose {
 	@Override
 	public boolean isValidate() {
 		boolean success = true;
-		System.out.println("Validate Browser Node Lookup response =====================");
+		_logger.info("Validate Browser Node Lookup response =====================");
 
 		if (!BasicApiRespose.validateString(this.getSourceObjectId())) {
-			System.out.println("source object test failed!");
+			_logger.info("source object test failed!");
 			success = false;			
 		}
 		
 		if (!BasicApiRespose.validateString(this.getName())) {
-			System.out.println("Name test failed!");
+			_logger.info("Name test failed!");
 			success = false;			
 		}
 
 		if (!BasicApiRespose.validateString(this.getParentSourceObjectId())) {
-			System.out.println("ParentsourceObjectId test failed!");
+			_logger.info("ParentsourceObjectId test failed!");
 			success = false;			
 		}
 		
 		if (!BasicApiRespose.validateList(this.getChildrenSourceObjectId())) {
-			System.out.println("Children list failed!");
+			_logger.info("Children list failed!");
 			success = false;			
 		}
 	
 		
 
 		if (!success) {
-			System.out.println("Browser Node Lookup test failed!!!!!!!!!!!!!!!!!");
+			_logger.info("Browser Node Lookup test failed!!!!!!!!!!!!!!!!!");
 		} else {
-			System.out.println("Browser Node Lookup test passed!!!!!!!!!!!!!!!!!");
+			_logger.info("Browser Node Lookup test passed!!!!!!!!!!!!!!!!!");
 		}
 		
 		return success;
