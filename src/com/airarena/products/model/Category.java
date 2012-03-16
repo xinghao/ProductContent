@@ -145,6 +145,7 @@ public class Category extends BaseModel{
 		this.permalink = permalink;
 	}
 
+	@org.hibernate.annotations.Index(name = "myCategorySourceObjectIdIndex")
 	public String getSource_object_id() {
 		return source_object_id;
 	}

@@ -57,7 +57,8 @@ public class ProductReview extends BaseModel {
 	}
 
 	@ManyToOne
-    @JoinColumn(name="product_id")	
+    @JoinColumn(name="product_id")
+    @org.hibernate.annotations.Index(name = "myProductPricePreviewIndex")    
 	public Product getProduct() {
 		return product;
 	}

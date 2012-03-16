@@ -59,6 +59,7 @@ public class ScrapingStatus extends BaseModel {
 	}
 	
 	@Embedded
+	@org.hibernate.annotations.Index(name = "myScrapingStatusScraperVersionIndex")
 	public ScraperVersion getScraper_version() {
 		return scraper_version;
 	}

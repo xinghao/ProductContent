@@ -48,7 +48,8 @@ public class ProductPrice extends BaseModel {
 
 
 	@ManyToOne
-    @JoinColumn(name="product_id")		
+    @JoinColumn(name="product_id")
+    @org.hibernate.annotations.Index(name = "myProductPriceProductIndex")
 	public Product getProduct() {
 		return product;
 	}
