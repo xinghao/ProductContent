@@ -73,6 +73,13 @@ public class BrowserNodeLookupRequest extends BasicApiRequest {
 			throw new AwsApiException("Xpath error: " + e.getMessage());
 		}
 		  
+		try {
+			Thread.sleep(500); //extra 500 ms here
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 //	    Node browserNodes = doc.getElementsByTagName("").item(0);
 
 		// TODO Auto-generated method stub

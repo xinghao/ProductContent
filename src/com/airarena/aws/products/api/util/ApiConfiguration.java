@@ -8,7 +8,7 @@ import com.airarena.products.conf.ConfigElementTags;
 public class ApiConfiguration {
 	
 	private static ArrayList<ApiConfiguration> _instances = null;
-	
+	private static int listIndex = 0;
 	private String awsAccessKeyId;
 	private String awsSecretKey;
 	private String awsApiVersion;
@@ -29,14 +29,18 @@ public class ApiConfiguration {
 	
 	public static ApiConfiguration getInstance() {
 		if(ApiConfiguration._instances == null) {
+			listIndex = 0;
 			ApiConfiguration._instances = new ArrayList<ApiConfiguration>();
 			ApiConfiguration._instances.add(new ApiConfiguration("AKIAJSR3VSJWDRDRRP6A", "lUW7dz1hKLhMBa4ZKF64UKTLC59pkRaxyqzgw8zP", "xingza-20"));
 			ApiConfiguration._instances.add(new ApiConfiguration("AKIAJ3P3UODLSW5VP3XQ", "xWZ72mryi+UXTbk9ptj6T7zN956OZI5mqSeIjFzm", "crazytvs-20"));
 			ApiConfiguration._instances.add(new ApiConfiguration("AKIAIVEX4SSUHD7BH36A", "e4sxxdPb65OnU+5meXczCTKxzweyuXO4hEEUciXP", "textbooksfore-20"));
 	      }
 		
-		Random randomGenerator = new Random();
-		return ApiConfiguration._instances.get(randomGenerator.nextInt(ApiConfiguration._instances.size()));
+		//Random randomGenerator = new Random();
+		//return ApiConfiguration._instances.get(randomGenerator.nextInt(ApiConfiguration._instances.size()));
+		listIndex++;
+		if (listIndex == 3) listIndex = 0;
+		return ApiConfiguration._instances.get(listIndex);
 		
 
 	}

@@ -89,6 +89,7 @@ public abstract class BasicApiRequest {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(requestUrl);
+			Thread.sleep(500); //for production 100000, it iwll be cool to be 800 for local
             return parseResponse(doc);
         } catch (Exception e) {
             throw new RuntimeException(e);

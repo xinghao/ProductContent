@@ -333,7 +333,8 @@ public class ItemLookupRequest extends BasicApiRequest {
 		}
 		
 		expr = xpath.compile("//ItemAttributes");
-		buildItemAttributes((Node)expr.evaluate(doc, XPathConstants.NODE));
+		Node df = (Node)expr.evaluate(doc, XPathConstants.NODE);
+		buildItemAttributes(df);
 
 		
 		

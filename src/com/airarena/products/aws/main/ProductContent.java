@@ -84,7 +84,6 @@ public class ProductContent {
 				_logger.info(productSourceObjectId);
 				buildAProduct(productSourceObjectId, c, version);
 				totalItemsFetched++;
-				Thread.sleep(100);
 			} catch (Exception e) {				
 				// TODO Auto-generated catch block
 				_logger.error(e);
@@ -133,7 +132,7 @@ public class ProductContent {
 		ScrapingStatus ss = null;
 		Category resumeFromCategory = null; 
 		try {
-			ss = ScrapingStatus.nextNewScrapingVersion(false);
+			ss = ScrapingStatus.nextNewScrapingVersion(isResume);
 			
 			// running api test.
 			if (TestItemLookUp.test()) {
@@ -224,7 +223,7 @@ public class ProductContent {
 				break;
 			case 5:
 				_logger.info("case 5 is testing");
-
+				InitDB.insertInitData();
 				if (TestItemLookUp.test()) {
 					_logger.info("Test passed!");
 				}
@@ -234,6 +233,7 @@ public class ProductContent {
 				_logger.info("debug mode");
 				InitDB.insertInitData();
 				
+				/*
 				Category maxCategoryIdScraped = ScrapingStatus.getMaxCategoryIdAlreadyExist(1L);
 
 				
@@ -251,6 +251,7 @@ public class ProductContent {
 				}catch(Exception e) {
 					
 				}
+				*/
 				//System.out.println(ScrapingStatus.getMaxScrapingVersion());
 //				ScrapingStatus ss = ScrapingStatus.nextNewScrapingVersion(true); 
 				//images B004LDG9IO
@@ -261,9 +262,9 @@ public class ProductContent {
 //				ilrb.setCategoryId(1L);
 //				Product p = Product.createOrUpdateFromAwsApi(ilrb, 1);	
 
-//				EntityManager entityManager = MyEntityManagerFactory.getInstance();
-//				
-//				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 1L), 1L);
+				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+				
+				buildAProduct("B0048JGC6U", entityManager.find(Category.class, 1L), 1L);
 //				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 2L), 1L);
 //				ss.setStatus(ScrapingStatus.SUCCESS);
 //				ss.save();
