@@ -1,5 +1,5 @@
 <project name="product_content" basedir="." default="build">
-	<property name="project.version" value="0.9"/>
+	<property name="project.version" value="1.5.6"/>
     <property name="src.dir" value="src"/>
     <property name="lib.dir" value="lib"/> 
     <property name="conf.dir" value="conf"/>    

@@ -32,7 +32,7 @@ import com.airarena.hibernate.util.MyEntityManagerFactory;
 @Table( name = "categories" )
 @NamedQuery(name="category.findBySourceObjectId", query="select n from Category n where source_object_id = :sourceObjectId")
 public class Category extends BaseModel{
-    private Long id;
+    private long id;
 
     private String name;
     private String permalink;
@@ -113,11 +113,11 @@ public class Category extends BaseModel{
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-    public Long getId() {
+    public long getId() {
 		return id;
     }
 
-    private void setId(Long id) {
+    private void setId(long id) {
 		this.id = id;
     }
     

@@ -43,6 +43,7 @@ public class MyEntityManagerFactory {
 				
 	}
 
+
 	
 	
 	public static void main(String[] args) {
@@ -50,8 +51,14 @@ public class MyEntityManagerFactory {
 	}
 	
 	
-	public void releaseSession() {
+	public static void releaseSession() {
+		for(String provider : emList.keySet()) {
+			EntityManager entityManager = emList.get(provider);
+			entityManager.close();
+		}
+		emList.clear();
 		entityManagerFactory.close();
+		entityManagerFactory = Persistence.createEntityManagerFactory( MyEntityManagerFactory.JPA_UNIT );		
 	}
 	
 

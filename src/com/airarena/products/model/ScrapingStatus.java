@@ -22,7 +22,7 @@ import com.airarena.scraper.ScrapingException;
 @Entity
 @Table( name = "scraping_status" )
 @NamedQuery(name="scrapingStatus.maxVersion", query="select max(scraper_version) from ScrapingStatus")
-
+//@NamedQuery(name="scrapingStatus.searchbysv", query="select n from ScrapingStatus n where  scraper_version = :scraperVersion")
 public class ScrapingStatus extends BaseModel {
     public static final String SUCCESS = "success";
     public static final String ERROR = "error";
@@ -103,7 +103,9 @@ public class ScrapingStatus extends BaseModel {
 			Query q = entityManager.createNamedQuery("scrapingStatus.maxVersion");
 			ScraperVersion sv = (ScraperVersion)q.getSingleResult();
 			if (sv == null) return null;
-			return entityManager.find(ScrapingStatus.class, sv.getScraper_version());
+			return entityManager.createQuery( "select n from ScrapingStatus n where  scraper_version = :scraperVersion",  ScrapingStatus.class)
+            .setParameter( "scraperVersion", sv ).getSingleResult();
+			//
 		} catch (NoResultException e) {
 			return null;
 		} catch (NumberFormatException e1) {
@@ -116,7 +118,9 @@ public class ScrapingStatus extends BaseModel {
 		ScrapingStatus ss = getMaxScrapingVersion();
 		if (ss == null) {
 			return (ScrapingStatus)s.newModel(new ScrapingStatus(1L, RUNNING));
-		} else if (ignoreError || ss.getStatus().equalsIgnoreCase(SUCCESS)) {
+		} else if (ignoreError) {
+			return ss;
+		} else if (ss.getStatus().equalsIgnoreCase(SUCCESS))  {
 			return (ScrapingStatus)s.newModel(new ScrapingStatus(ss.getScraper_version().getScraper_version() + 1, RUNNING));
 		} else {			
 			throw new ScrapingException("The preview scraping is wrong or still running....");
@@ -130,6 +134,7 @@ public class ScrapingStatus extends BaseModel {
 	}
 	
 
+	/*
 	public static Category getMaxCategoryIdAlreadyExist(long version) {
 		try {
 			EntityManager entityManager = MyEntityManagerFactory.getInstance();						
@@ -140,5 +145,6 @@ public class ScrapingStatus extends BaseModel {
 			return null;
 		}		
 	}
+	*/
     
 }

@@ -42,7 +42,7 @@ public class AwsScraper extends Scraper {
 		Element totalAmountTag = summaryContainerTag.select("div > div.tiny > b").first();
 		if (totalAmountTag != null) {
 			hasReview = true;
-			review.setTotalReviewsAmount(Integer.valueOf(totalAmountTag.html().toLowerCase().replaceAll("reviews", "").trim()));
+			review.setTotalReviewsAmount(Integer.valueOf(totalAmountTag.html().toLowerCase().replaceAll("reviews|,", "").replaceAll("review", "").trim()));
 			//_logger.info(totalReviewAmount);
 		}		
 		
@@ -53,19 +53,19 @@ public class AwsScraper extends Scraper {
 				hasReview = true;
 				String starName = whichStar.child(0).html();
 				if (starName.startsWith("5")) {						
-					review.setFiveStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
+					review.setFiveStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;|,", "")));
 //					_logger.info(fiveStarAmount);
 				} else if (starName.startsWith("4")) {						
-					review.setFourStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
+					review.setFourStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;|,", "")));
 					//_logger.info(fourStarAmount);
 				} else if (starName.startsWith("3")) {						
-					review.setThreeStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
+					review.setThreeStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;|,", "")));
 					//_logger.info(threeStarAmount);
 				} else if (starName.startsWith("2")) {						
-					review.setTwoStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
+					review.setTwoStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;|,", "")));
 					//_logger.info(twoStarAmount);
 				} else if (starName.startsWith("1")) {						
-					review.setOneStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;", "")));
+					review.setOneStarAmount(Integer.valueOf(starAmountTag.child(2).html().trim().replaceAll("\\(|\\)|&nbsp;|,", "")));
 					//_logger.info(oneStarAmount);
 				}
 			}

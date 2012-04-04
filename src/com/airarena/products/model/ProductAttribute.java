@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,7 +28,7 @@ public class ProductAttribute extends BaseModel {
 	
     private Long id;
     		
-	private Long product_id;
+	private Product product;
 	private Long product_attribute_meta_key_id;
 	private String value;
     private int is_valid = 1;
@@ -43,11 +45,10 @@ public class ProductAttribute extends BaseModel {
 
 
 
-	public ProductAttribute(Long product_id,
-			Long product_attribute_meta_key_id, String value, int is_valid,
-			int version) {
+	public ProductAttribute(Product p,
+			Long product_attribute_meta_key_id, String value, int is_valid) {
 		super();
-		this.product_id = product_id;
+		this.product = p;
 		this.product_attribute_meta_key_id = product_attribute_meta_key_id;
 		this.value = value;
 		this.is_valid = is_valid;
@@ -73,18 +74,26 @@ public class ProductAttribute extends BaseModel {
 	}
 
 
-	@org.hibernate.annotations.Index(name = "myProductAttributeProductIdIndex")
-	public Long getProduct_id() {
-		return product_id;
+//	@org.hibernate.annotations.Index(name = "myProductAttributeProductIdIndex")
+//	public Long getProduct_id() {
+//		return product_id;
+//	}
+//
+//
+//
+//	public void setProduct_id(Long product_id) {
+//		this.product_id = product_id;
+//	}
+
+	@ManyToOne
+    @JoinColumn(name="product_id")
+    @org.hibernate.annotations.Index(name = "myProductAttributeProductIdIndex")
+	public Product getProduct() {
+		return product;
 	}
-
-
-
-	public void setProduct_id(Long product_id) {
-		this.product_id = product_id;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-
-
 
 	public Long getProduct_attribute_meta_key_id() {
 		return product_attribute_meta_key_id;

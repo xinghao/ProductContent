@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -11,12 +12,14 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.airarena.product.resources.Image;
 import com.airarena.product.resources.Price;
+import com.airarena.products.aws.main.ProductContent;
 import com.airarena.products.model.Product;
 import com.airarena.products.model.ProductAttributeMetaKey;
 import com.airarena.products.model.ProductCondition;
@@ -24,7 +27,9 @@ import com.airarena.products.model.ProductPrice;
 import com.airarena.scraper.AwsScraper;
 import com.airarena.scraper.Scraper;
 
-public class ItemLookupRequest extends BasicApiRequest {
+public class ItemLookupRequest extends BasicApiRequest implements Runnable{
+	
+	private static final Logger _logger = Logger.getLogger(ItemLookupRequest.class);
 	
 	private String sourceObjectId;
 	private int reviewPage = 1;
@@ -33,9 +38,50 @@ public class ItemLookupRequest extends BasicApiRequest {
 	//private String tagSort = "Usages";
 	private boolean includeReviewsSummary = true;
 	private ItemLookupResponse ilr= null;
-
-
 	
+	private List<ItemLookupResponse> multiIlrList;
+	private ApiConfiguration apiConf;
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try {
+			multiIlrList.add((ItemLookupResponse) call(apiConf));
+			//Thread.sleep(1600);
+			TimeUnit.SECONDS.sleep(2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			_logger.error(e);
+		}
+		
+		
+	}
+	
+	public ApiConfiguration getApiConf() {
+		return apiConf;
+	}
+
+
+
+	public void setApiConf(ApiConfiguration apiConf) {
+		this.apiConf = apiConf;
+	}
+
+
+
+	public List<ItemLookupResponse> getMultiIlrList() {
+		return multiIlrList;
+	}
+
+
+
+	public void setMultiIlrList(List<ItemLookupResponse> multiIlrList) {
+		this.multiIlrList = multiIlrList;
+	}
+
+
+
 	public ItemLookupRequest(String sourceObjectId, int reviewPage, int tagPage) {
 		super();
 		this.sourceObjectId = sourceObjectId;
@@ -46,7 +92,7 @@ public class ItemLookupRequest extends BasicApiRequest {
         params.put("ResponseGroup", BasicApiRequest.AWS_RESPONSE_GROUP_ITEMLOOKUP + "," + BasicApiRequest.AWS_RESPONSE_GROUP_OFFERSUMMARY);
         params.put("IncludeReviewsSummary", String.valueOf(this.includeReviewsSummary));
         params.put("ItemId", this.sourceObjectId);
-        params.put("ReviewPage", "2"); //String.valueOf(this.reviewPage));
+        params.put("ReviewPage", "1"); //String.valueOf(this.reviewPage));
         params.put("ReviewSort", "SubmissionDate");
 
 //        params.put("TagPage", String.valueOf(this.tagPage));
@@ -332,7 +378,7 @@ public class ItemLookupRequest extends BasicApiRequest {
 			this.buildPrimaryOrVariantImage(doc, BasicApiRequest.AWS_PRODUCT_IMAGE_VARIANT);
 		}
 		
-		expr = xpath.compile("//ItemAttributes");
+		expr = xpath.compile("//ItemAttributes");//ItemAttributes
 		Node df = (Node)expr.evaluate(doc, XPathConstants.NODE);
 		buildItemAttributes(df);
 
@@ -369,5 +415,7 @@ public class ItemLookupRequest extends BasicApiRequest {
 			throw new AwsApiException("Xpath error: " + e.getMessage());
 		}
 		return this.ilr;	}
+
+	
 
 }

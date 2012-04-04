@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,7 +30,8 @@ public class ProductImage extends BaseModel {
 	
     private Long id;
 	
-	private Long product_id;
+	private Product product;
+	
 	private String url;
 	private String image_category;
 	private int weight;
@@ -42,8 +45,8 @@ public class ProductImage extends BaseModel {
     	
     }
     
-    public ProductImage(Long productId, Image image, int is_valid, int version) {
-    	this.product_id = productId;
+    public ProductImage(Product p, Image image, int is_valid) {
+    	this.product = p;
     	this.url = image.getUrl();
     	this.image_category = image.getImageCategory();
     	this.weight = image.getWeight();
@@ -65,13 +68,27 @@ public class ProductImage extends BaseModel {
 	}
 	
 	
-	@org.hibernate.annotations.Index(name = "myProductImageProductIdIndex")	
-	public Long getProduct_id() {
-		return product_id;
+	@ManyToOne
+    @JoinColumn(name="product_id")
+    @org.hibernate.annotations.Index(name = "myProductImageProductIdIndex")
+	public Product getProduct() {
+		return product;
 	}
-	public void setProduct_id(Long product_id) {
-		this.product_id = product_id;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
+	
+	
+//	@org.hibernate.annotations.Index(name = "myProductImageProductIdIndex")	
+//	public Long getProduct_id() {
+//		return product_id;
+//	}
+//	public void setProduct_id(Long product_id) {
+//		this.product_id = product_id;
+//	}
+	
+	
+	
 	public String getUrl() {
 		return url;
 	}

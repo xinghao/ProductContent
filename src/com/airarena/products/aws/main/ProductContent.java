@@ -7,8 +7,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+
 import org.apache.log4j.Logger;
 
+import com.airarena.aws.products.api.util.ApiConfiguration;
 import com.airarena.aws.products.api.util.AwsApiException;
 import com.airarena.aws.products.api.util.BasicApiRequest;
 import com.airarena.aws.products.api.util.BrowserNodeLookupRequest;
@@ -52,6 +54,71 @@ public class ProductContent {
 		
 	}
 	
+	private static void multiProductBuilts(ItemSearchResponse b, Category c, long version) {
+
+		try {
+			ThreadGroup g = new ThreadGroup("MultipleLookupRequest");		
+			List<ItemLookupResponse> multiIlrList = new ArrayList<ItemLookupResponse>();
+			
+			for(int i = 0; i<10 && i< b.getItemsIdList().size(); i++ ) {
+	
+					String productSourceObjectId = b.getItemsIdList().get(i);
+					_logger.info(productSourceObjectId);
+					ItemLookupRequest bar = new ItemLookupRequest(productSourceObjectId, 1, 1);
+					bar.setMultiIlrList(multiIlrList);
+					bar.setApiConf(ApiConfiguration.getInstance());
+					Thread t = new Thread(g, bar, productSourceObjectId);
+					t.start();
+					//ItemLookupResponse ilrb = (ItemLookupResponse) bar.call();				
+			}
+			
+			// wait 15 seconds before force quite
+			int icount = 0;
+			while(true) {
+				if (g.activeCount() == 0) {
+					_logger.info("all finished");					
+					break;
+				}
+				
+				Thread.sleep(1000);
+				icount++;
+				if (icount == 15) {
+					g.interrupt();
+					break;
+				}
+			}
+			
+			
+			for(ItemLookupResponse ilrb : multiIlrList) {
+				ilrb.setCategory(c);
+				Product p = Product.createOrUpdateFromAwsApi(ilrb, version);
+			}
+			
+		} catch (Exception e) {				
+			// TODO Auto-generated catch block
+			_logger.error(e);
+		}
+		
+		/* mulitthread 
+		
+
+		for(int i = 0; i< b.getItemsIdList().size(); i++) {
+			MyThread m = new MyThread();
+			m.setCount(i);
+			Thread f = new Thread(g, m, "hello" + i);
+			f.start();
+		}
+		
+		System.out.println("checking.........");
+		while(true) {
+			if (g.activeCount() == 0) {
+				System.out.println("all finished");
+				break;
+			}
+		}
+		*/
+	}
+	
 	private static void buildAProduct(String sourceObjectId, Category category, long version) {
 		
 		BasicApiRequest bar = new ItemLookupRequest(sourceObjectId, 1, 1);
@@ -64,21 +131,31 @@ public class ProductContent {
 	
 	private static ItemSearchResponse buildOnePageProductsForCategory(Category c, int page, String sort, Long maxPrice, long version) {
 		
+		MyEntityManagerFactory.releaseSession();
+		
 		BasicApiRequest bar = new ItemSearchRequest(c.getSource_object_id(), BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, page, sort, maxPrice);
 		ItemSearchResponse b = (ItemSearchResponse) bar.call();
 //		System.out.println(b);
 		
 		int totalItemsFetched = 0;
 		int ignore = 0;
-		for(int i = 0; i<10 && i< b.getItemsIdList().size(); i++ ) {
-			if (tmpList.containsKey(b.getItemsIdList().get(i))) {
-				ignore++;
-			}
-			tmpList.put(b.getItemsIdList().get(i), b.getItemsIdList().get(i));
-		}
-		_logger.info("ignore: " + ignore);
 
-		for(int i = 0; i<10 && i< b.getTotalItems(); i++ ) {
+// remove test info.		
+//		for(int i = 0; i<10 && i< b.getItemsIdList().size(); i++ ) {
+//			if (tmpList.containsKey(b.getItemsIdList().get(i))) {
+//				ignore++;
+//			}
+//			tmpList.put(b.getItemsIdList().get(i), b.getItemsIdList().get(i));
+//		}
+//		_logger.info("ignore: " + ignore);
+
+
+		/* mulitple thread */ 
+		multiProductBuilts( b, c, version);
+ 
+
+/* one thread		
+		for(int i = 0; i<10 && i< b.getItemsIdList().size(); i++ ) {
 			try {
 				String productSourceObjectId = b.getItemsIdList().get(i);
 				_logger.info(productSourceObjectId);
@@ -89,7 +166,7 @@ public class ProductContent {
 				_logger.error(e);
 			}
 		}
-	
+*/
 		return b;
 		
 	}
@@ -99,6 +176,8 @@ public class ProductContent {
 		Long currentLowPrice = 0L;
 		int currentPageNumberInTen = 0;
 		Long totalItemsFetched = 0L;
+		Long previousLowPrice = -1L;
+
 		while (true) {
 			
 			// build 1 page
@@ -115,12 +194,22 @@ public class ProductContent {
 			// reset page number and low price for every 10 pages.
 			if (currentPageNumberInTen == 10) {
 				currentPageNumberInTen = 0;
-				if (currentLowPrice == b.getPageMaxNewPrice()) {
+				
+				_logger.info("Previews price: " + previousLowPrice.longValue());
+				_logger.info("Current price: " + currentLowPrice.longValue());
+				if (currentLowPrice.longValue() == previousLowPrice.longValue()) {
 					_logger.info("!!!!!!!!!!!!!!!!! products missing for price: " + currentLowPrice + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-					currentLowPrice += 1;
+					currentLowPrice =  currentLowPrice + 1;
 				} else {
+					previousLowPrice = currentLowPrice;
 					currentLowPrice = b.getPageMaxNewPrice();
 				}
+//				if (currentLowPrice == b.getPageMaxNewPrice()) {
+//					_logger.info("!!!!!!!!!!!!!!!!! products missing for price: " + currentLowPrice + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//					currentLowPrice += 1;
+//				} else {
+//					currentLowPrice = b.getPageMaxNewPrice();
+//				}
 			}
 		}
 		
@@ -143,7 +232,10 @@ public class ProductContent {
 			
 			boolean isBuildCategories = true;
 			if (isResume) {
-				resumeFromCategory = ScrapingStatus.getMaxCategoryIdAlreadyExist(ss.getScraper_version().getScraper_version());
+				long scraperVersion = ss.getScraper_version().getScraper_version();
+				_logger.info("current scraper version: " +scraperVersion);
+				//resumeFromCategory = ScrapingStatus.getMaxCategoryIdAlreadyExist(scraperVersion);
+				resumeFromCategory = ss.getCategory();
 				_logger.info("resume mode, max category id: " + resumeFromCategory.getId());
 				if (resumeFromCategory != null) {
 					isBuildCategories = false;
@@ -155,20 +247,22 @@ public class ProductContent {
 			}
 
 			List<Category> cs = Category.getLeafCatgories(ss.getScraper_version().getScraper_version());
-			for(int i=0; i< cs.size(); i++) {
+			System.out.println("current scrapping start from: " + resumeFromCategory.getId());
+			for(int i=1; i<= cs.size(); i++) {
 				boolean isOverride = true;
-				if (isResume && resumeFromCategory != null && i < resumeFromCategory.getId()) {
+				Category c = cs.get(i);
+				if (isResume && resumeFromCategory != null && c.getId() < resumeFromCategory.getId()) {
 					_logger.info("resume mode, skip: " + i);
+					System.out.println("resume mode, skip: " + i);
 					continue;
 				} 
 				
-				Category c = cs.get(i);
 				ss.setCategory(c);
 				ss.save();
 				buildAllProductsForCategory(c, ss.getScraper_version().getScraper_version());
 				//System.out.println("Total:" + buildAllProductsForCategory(c, 1));
 				//System.out.println("Total in list:" + tmpList.size());
-				break;
+				//break;
 			}
 			
 			ss.setStatus(ScrapingStatus.SUCCESS);
@@ -233,6 +327,11 @@ public class ProductContent {
 				_logger.info("debug mode");
 				InitDB.insertInitData();
 				
+				
+				//start(false);
+				EntityManager entityManager = MyEntityManagerFactory.getInstance();
+//				buildOnePageProductsForCategory(entityManager.find(Category.class, 4L), 1, null, null, 11);
+				buildAProduct("B002DMWJNY", entityManager.find(Category.class, 234L), 1L);
 				/*
 				Category maxCategoryIdScraped = ScrapingStatus.getMaxCategoryIdAlreadyExist(1L);
 
@@ -262,14 +361,17 @@ public class ProductContent {
 //				ilrb.setCategoryId(1L);
 //				Product p = Product.createOrUpdateFromAwsApi(ilrb, 1);	
 
-				EntityManager entityManager = MyEntityManagerFactory.getInstance();
 				
-				buildAProduct("B0048JGC6U", entityManager.find(Category.class, 1L), 1L);
+//				
+//				buildAProduct("B0048JGC6U", entityManager.find(Category.class, 1L), 1L);
 //				buildAProduct("B004LDG9IO", entityManager.find(Category.class, 2L), 1L);
 //				ss.setStatus(ScrapingStatus.SUCCESS);
 //				ss.save();
 				
-//				BasicApiRequest itms = new ItemSearchRequest("3224438011", BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, 1, null, null);
+				
+				//buildAllProductsForCategory(c, ss.getScraper_version().getScraper_version());
+				
+//				BasicApiRequest itms = new ItemSearchRequest("1288217011", BasicApiRequest.AWS_SEARCHINDEX_ELECTRONICS, 1, BasicApiRequest.AWS_SORT_US_ELECTRONIC_ASC, 44361L);
 //				ItemSearchResponse itsr = (ItemSearchResponse)itms.call();
 				
 				break;

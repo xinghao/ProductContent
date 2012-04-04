@@ -54,13 +54,20 @@ public abstract class BasicApiRequest {
 	protected Map<String, String> params = new HashMap<String, String>();
 	protected String requestUrl;
 	
+	
 	public BasicApiRespose call() {
+		ApiConfiguration apiConf = ApiConfiguration.getInstance();
+		return call(apiConf);        
+	}
+	
+	
+	public BasicApiRespose call(ApiConfiguration apiConf) {
 		
     	/*
          * Set up the signed requests helper 
          */
         SignedRequestsHelper helper;
-        ApiConfiguration apiConf = ApiConfiguration.getInstance();
+        
         try {
             helper = SignedRequestsHelper.getInstance(apiConf.getAwsEndPoint(), apiConf.getAwsAccessKeyId(), apiConf.getAwsSecretKey());
         } catch (Exception e) {
@@ -89,7 +96,7 @@ public abstract class BasicApiRequest {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(requestUrl);
-			Thread.sleep(500); //for production 100000, it iwll be cool to be 800 for local
+			//Thread.sleep(500); //for production 100000, it iwll be cool to be 800 for local
             return parseResponse(doc);
         } catch (Exception e) {
             throw new RuntimeException(e);

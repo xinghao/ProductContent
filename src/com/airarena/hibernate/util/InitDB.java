@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import com.airarena.aws.products.api.util.ItemSearchResponse;
 import com.airarena.products.model.*;
 
+//create index myProductSourceObjectId on products (source_object_id)
+//alter table category_product rename column provider_id to product_id;
 public class InitDB {
 	private static final Logger _logger = Logger.getLogger(InitDB.class);
 	// should only be run when we create database

@@ -14,7 +14,7 @@ import com.airarena.hibernate.util.MyEntityManager;
 public class TestItemLookUp {
 	private static final Logger _logger = Logger.getLogger(TestItemLookUp.class);
 	
-	private static String[] sourceObjectIdList = {"B004N866SU", "B0048JGC6U"};//"B004LDG9IO", "B004N866SU"}; 
+	private static String[] sourceObjectIdList = {"B004N866SU"};//, "B0048JGC6U"};//"B004LDG9IO", "B004N866SU"}; 
 	private static String[] categoryIdList = {"493964"};//"B004LDG9IO", "B004N866SU"};
 	private static String[] browseIdList = {"172532"};
 	

@@ -27,6 +27,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.OneToMany;
 
 
+import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Type;
@@ -42,6 +43,7 @@ import com.airarena.product.resources.Review.ReviewDetail;
 @Table( name = "products" )
 public class Product extends BaseModel {
 	
+	private static final Logger _logger = Logger.getLogger(Product.class);	
     private Long id;
     
 	private String source_object_id;	
@@ -72,6 +74,8 @@ public class Product extends BaseModel {
     private Set<ProductPrice> pcSet;
     private Set<ProductReview> prSet;
     private Set<ProductSpecification> psSet;
+    private Set<ProductImage> piSet;
+    private Set<ProductAttribute> paSet;
 	
 	public Product() {
 	}
@@ -189,7 +193,7 @@ public class Product extends BaseModel {
 	
 	@ManyToMany
 	@JoinTable(name="category_product",
-		      joinColumns={@JoinColumn(name="provider_id")},
+		      joinColumns={@JoinColumn(name="product_id")},
 		      inverseJoinColumns={@JoinColumn(name="category_id")})	
 	@org.hibernate.annotations.Index(name = "myProductCategoryIndex")
 	public Set<Category> getCategories() {
@@ -313,7 +317,26 @@ public class Product extends BaseModel {
 //	public void setPrice_amount(Long price_amount) {
 //		this.price_amount = price_amount;
 //	}
+	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)
+	public Set<ProductImage> getPiSet() {
+		return piSet;
+	}
 
+
+	public void setPiSet(Set<ProductImage> piSet) {
+		this.piSet = piSet;
+	}
+
+	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)
+	public Set<ProductAttribute> getPaSet() {
+		return paSet;
+	}
+
+
+	public void setPaSet(Set<ProductAttribute> paSet) {
+		this.paSet = paSet;
+	}
+	
 
 	@OneToMany(mappedBy="product",orphanRemoval=true, cascade=CascadeType.ALL)
 	public Set<ProductSpecification> getPsSet() {
@@ -489,22 +512,35 @@ public class Product extends BaseModel {
 
 		EntityManager entityManager = MyEntityManagerFactory.getInstance();
 		
+		long startTime = System.currentTimeMillis();
+		
 		Product p = findBySourceOjbectId(ilr.getSourceObjectId());
+		
+		long endTime = System.currentTimeMillis();
+		_logger.info("finding existing product takes: " + (endTime - startTime) + " milliseconds");
 		
 		entityManager.getTransaction().begin();
 		
 		if (p != null) {
 			
-			// delete related images and attributes
-			String hqlDelete1 = "delete " + ProductImage.class.getName() + " where product_id = :productId";
-			int deletedEntities1 = entityManager.createQuery( hqlDelete1 )
-			                            .setParameter( "productId", p.getId() )
-			                            .executeUpdate();
+			// delete related images and attributes  -- this task now will be done by association
 			
-			String hqlDelete2 = "delete " + ProductAttribute.class.getName() + " where product_id = :productId";
-			int deletedEntities2 = entityManager.createQuery( hqlDelete2 )
-			                            .setParameter( "productId", p.getId() )
-			                            .executeUpdate();	
+//			String hqlDelete1 = "delete " + ProductImage.class.getName() + " where product_id = :productId";
+//			startTime = System.currentTimeMillis();
+//			int deletedEntities1 = entityManager.createQuery( hqlDelete1 )
+//			                            .setParameter( "productId", p.getId() )
+//			                            .executeUpdate();
+//			endTime = System.currentTimeMillis();
+//			_logger.info("delete all images existing product takes: " + (endTime - startTime) + " milliseconds");
+//			
+//			String hqlDelete2 = "delete " + ProductAttribute.class.getName() + " where product_id = :productId";
+//			
+//			startTime = System.currentTimeMillis();
+//			int deletedEntities2 = entityManager.createQuery( hqlDelete2 )
+//			                            .setParameter( "productId", p.getId() )
+//			                            .executeUpdate();	
+//			endTime = System.currentTimeMillis();
+//			_logger.info("delete all attributes existing product takes: " + (endTime - startTime) + " milliseconds");
 			
 			// remove all prices.
 			//p.getPcSet().removeAll(p.getPcSet());
@@ -512,8 +548,17 @@ public class Product extends BaseModel {
 			
 			//p.category_id = ilr.getCategoryId();
 //			p.setCategory(ilr.getCategory());
+			startTime = System.currentTimeMillis();
 			if (p.getScraper_version().getScraper_version() == version) {
-				if (!p.getCategories().contains(ilr.getCategory())) {
+				boolean isContained = false;
+				for(Category c : p.getCategories()) {
+					if (c.getId() == ilr.getCategory().getId()) {
+						isContained = true;
+						break;
+					}
+				}
+				
+				if (!isContained) {
 					p.getCategories().add(ilr.getCategory());
 				}
 			} else {
@@ -522,6 +567,8 @@ public class Product extends BaseModel {
 				chs.add(ilr.getCategory());				
 				p.setCategories(chs);
 			}
+			endTime = System.currentTimeMillis();
+			_logger.info("Set categories takes: " + (endTime - startTime) + " milliseconds");
 			
 			p.raw_xml_content_url = ilr.getRawXmlContentUrl();
 			p.raw_html_content_url = ilr.getRawHtmlContentUrl();
@@ -548,7 +595,7 @@ public class Product extends BaseModel {
 					
 		}
 
-
+		startTime = System.currentTimeMillis();
 		Set<ProductPrice> pcSet = p.getPcSet();
 		if (pcSet == null) {
 			pcSet = new HashSet<ProductPrice>();			
@@ -560,9 +607,53 @@ public class Product extends BaseModel {
 		}		
 		
 		p.setPcSet(pcSet);
+		endTime = System.currentTimeMillis();
+		_logger.info("Set price takes: " + (endTime - startTime) + " milliseconds");
 
+		
+	    
+		startTime = System.currentTimeMillis();
+		Set<ProductImage> piSet = p.getPiSet();
+		if (piSet == null) {
+			piSet = new HashSet<ProductImage>();		
+		} else if (piSet.size() > 0) {
+			piSet.clear();
+		}
+		
+		for(String imageCategory : ilr.getImages().keySet()) {
+			piSet.add(ilr.getImages().get(imageCategory).toProductImage(p));
+		}
+		p.setPiSet(piSet);
+		endTime = System.currentTimeMillis();
+		_logger.info("Set iamges takes: " + (endTime - startTime) + " milliseconds");
+		
+		
+			     		
+		startTime = System.currentTimeMillis();
+        Set<ProductAttribute> paSet = p.getPaSet();
+        if (paSet == null) {
+        	paSet = new HashSet<ProductAttribute>();	
+        } else if (paSet.size() > 0) {
+        	paSet.clear();
+        }
+        
+        for(Long attributeId : ilr.getItemAttributes().keySet()) {
+        	paSet.add(new ProductAttribute(p, attributeId, ilr.getItemAttributes().get(attributeId), 1));
+        }
+
+        p.setPaSet(paSet);
+		endTime = System.currentTimeMillis();
+		_logger.info("Set item attributes takes: " + (endTime - startTime) + " milliseconds");
+		
+		
+		
+		
+		
+		startTime = System.currentTimeMillis();
 		// save or updated product
 		entityManager.persist(p);
+		endTime = System.currentTimeMillis();
+		_logger.info("save product takes: " + (endTime - startTime) + " milliseconds");
 		
 		// build up price list
 //		Set<ProductPrice> pcSet = new HashSet<ProductPrice>();
@@ -570,26 +661,37 @@ public class Product extends BaseModel {
 //			entityManager.persist(ilr.getPriceList().get(priceCategory).toProductPrice(p));
 //		}		
 		
-		Iterator iterator = ilr.getImages().keySet().iterator();
-	       
-        while(iterator. hasNext()){   
-        	String key = (String)iterator.next();
-            Image image = (Image)ilr.getImages().get(key);
-            entityManager.persist(new ProductImage(p.getId(), image, 1, 1));
-        }
-        
-		iterator = ilr.getItemAttributes().keySet().iterator();
-	       
-        while(iterator. hasNext()){   
-        	Long key = (Long)iterator.next();
-            String value = (String)ilr.getItemAttributes().get(key);
-            entityManager.persist(new ProductAttribute(p.getId(), key, value, 1, 1));
-        }
-        
+//		Iterator iterator = ilr.getImages().keySet().iterator();
+//	    
+//		startTime = System.currentTimeMillis();
+//		
+//        while(iterator. hasNext()){   
+//        	String key = (String)iterator.next();
+//            Image image = (Image)ilr.getImages().get(key);
+//            entityManager.persist(new ProductImage(p.getId(), image, 1, 1));
+//        }
+//		endTime = System.currentTimeMillis();
+//		_logger.info("Set iamges takes: " + (endTime - startTime) + " milliseconds");
 
-        
+		
+//		iterator = ilr.getItemAttributes().keySet().iterator();
+//	       
+//		
+//		startTime = System.currentTimeMillis();
+//        while(iterator. hasNext()){   
+//        	Long key = (Long)iterator.next();
+//            String value = (String)ilr.getItemAttributes().get(key);
+//            entityManager.persist(new ProductAttribute(p.getId(), key, value, 1, 1));
+//        }
+//		endTime = System.currentTimeMillis();
+//		_logger.info("Set item attributes takes: " + (endTime - startTime) + " milliseconds");
+
+
+		startTime = System.currentTimeMillis();
         entityManager.getTransaction().commit();
 
+		endTime = System.currentTimeMillis();
+		_logger.info("Commit takes: " + (endTime - startTime) + " milliseconds");
 
 		return p;
 		

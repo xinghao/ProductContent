@@ -19,6 +19,8 @@ import javax.persistence.Version;
 //drop table product_conditions;
 //drop table product_reviews;
 //drop table product_specifications;
+//drop table category_product;
+//drop table scraping_status;
 //drop table products;
 //drop table providers;
 //drop table categories;

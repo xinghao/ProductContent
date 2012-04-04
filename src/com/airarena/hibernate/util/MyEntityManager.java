@@ -30,7 +30,6 @@ public class MyEntityManager {
 		return newModel(model);
 	}
 	public BaseModel newModel(BaseModel model) {
-
 		EntityManager entityManager = MyEntityManagerFactory.getInstance(this.threadName);
 		entityManager.getTransaction().begin();
 		entityManager.persist( model );

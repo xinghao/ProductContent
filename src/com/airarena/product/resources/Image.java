@@ -1,5 +1,8 @@
 package com.airarena.product.resources;
 
+import com.airarena.products.model.Product;
+import com.airarena.products.model.ProductImage;
+
 public class Image extends BaseResource {
 	public static final String CATEGORY_THUMBNAIL = "thumbnail";
 	public static final String CATEGORY_TINY = "tiny";
@@ -57,7 +60,9 @@ public class Image extends BaseResource {
 	}
 	
 	
-	
+	public ProductImage toProductImage(Product p) {
+		return new ProductImage(p, this, 1);
+	}
 	
 	
 }
